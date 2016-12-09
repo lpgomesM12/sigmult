@@ -1,0 +1,18 @@
+CATEGORIAEMPRESA
+rails g scaffold categoriaempresa nome_categoria:string desc_descricao:string
+ESTADO
+rails g scaffold estado nome_estado:string sigl_estado:string flag_ativo:boolean
+CIDADE
+rails g scaffold cidade nome_cidade:string estado:references flag_ativo:boolean
+ENDERECO
+rails g scaffold endereco endereco:string cep:string complemento:string cidade:references
+EMPRESA
+rails g scaffold empresa nome_empresa endereco:references categoriaempresa:references cnpj:string nome_responsavel:string telefone1:string telefone2:string
+CATEGORIAPRODUTO
+rails g categoriaproduto nome_categoria:string        t.integer :father_id, :integer, :references => :categoriaprodutos
+PRODUTO
+rails g scaffold produto nome_produto:string desc_observacao:string categoriaproduto:references data_exclusao:datetime qtd_estoqueminimo:integer qtd_estoquemaximo:integer nome_marca:string cod_barras:string valor_custo:decimal valor_venda:decimal desc_tamanho:string status:string peso_kilograma:string desc_unidademedida:string
+MOVIMENTACAOPRODUTO
+rails g scaffold movimentacaoproduto qtd_produto:integer tipo_movimentacao:string valor_movimentacao:decimal produto:references data_exclusao:datetime
+ESTOQUE
+rails g scaffold estoque qtd_produto:integer produto:references

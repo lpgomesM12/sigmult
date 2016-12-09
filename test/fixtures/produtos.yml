@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nome_produto: MyString
+  desc_observacao: MyString
+  categoriaproduto: one
+  data_exclusao: 2016-12-05 15:43:36
+  qtd_estoqueminimo: 1
+  qtd_estoquemaximo: 1
+  nome_marca: MyString
+  cod_barras: MyString
+  valor_custo: 9.99
+  valor_venda: 9.99
+  desc_tamanho: MyString
+  status: MyString
+  peso_kilograma: MyString
+  desc_unidademedida: MyString
+
+two:
+  nome_produto: MyString
+  desc_observacao: MyString
+  categoriaproduto: two
+  data_exclusao: 2016-12-05 15:43:36
+  qtd_estoqueminimo: 1
+  qtd_estoquemaximo: 1
+  nome_marca: MyString
+  cod_barras: MyString
+  valor_custo: 9.99
+  valor_venda: 9.99
+  desc_tamanho: MyString
+  status: MyString
+  peso_kilograma: MyString
+  desc_unidademedida: MyString

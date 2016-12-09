@@ -1,0 +1,2 @@
+class Categoriaempresa < ApplicationRecord
+end

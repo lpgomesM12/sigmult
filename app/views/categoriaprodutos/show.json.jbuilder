@@ -1,0 +1,1 @@
+json.partial! "categoriaprodutos/categoriaproduto", categoriaproduto: @categoriaproduto

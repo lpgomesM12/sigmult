@@ -1,0 +1,1 @@
+json.array! @categoriaprodutos, partial: 'categoriaprodutos/categoriaproduto', as: :categoriaproduto

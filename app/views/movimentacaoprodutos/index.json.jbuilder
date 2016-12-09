@@ -1,0 +1,1 @@
+json.array! @movimentacaoprodutos, partial: 'movimentacaoprodutos/movimentacaoproduto', as: :movimentacaoproduto

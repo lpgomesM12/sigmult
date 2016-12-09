@@ -1,0 +1,42 @@
+<%= form_for(movimentacaoproduto) do |f| %>
+  <% if movimentacaoproduto.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(movimentacaoproduto.errors.count, "error") %> prohibited this movimentacaoproduto from being saved:</h2>
+
+      <ul>
+      <% movimentacaoproduto.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :qtd_produto %>
+    <%= f.number_field :qtd_produto %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tipo_movimentacao %>
+    <%= f.text_field :tipo_movimentacao %>
+  </div>
+
+  <div class="field">
+    <%= f.label :valor_movimentacao %>
+    <%= f.text_field :valor_movimentacao %>
+  </div>
+
+  <div class="field">
+    <%= f.label :produto_id %>
+    <%= f.text_field :produto_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :data_exclusao %>
+    <%= f.datetime_select :data_exclusao %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

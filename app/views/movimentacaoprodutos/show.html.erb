@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Qtd produto:</strong>
+  <%= @movimentacaoproduto.qtd_produto %>
+</p>
+
+<p>
+  <strong>Tipo movimentacao:</strong>
+  <%= @movimentacaoproduto.tipo_movimentacao %>
+</p>
+
+<p>
+  <strong>Valor movimentacao:</strong>
+  <%= @movimentacaoproduto.valor_movimentacao %>
+</p>
+
+<p>
+  <strong>Produto:</strong>
+  <%= @movimentacaoproduto.produto %>
+</p>
+
+<p>
+  <strong>Data exclusao:</strong>
+  <%= @movimentacaoproduto.data_exclusao %>
+</p>
+
+<%= link_to 'Edit', edit_movimentacaoproduto_path(@movimentacaoproduto) %> |
+<%= link_to 'Back', movimentacaoprodutos_path %>

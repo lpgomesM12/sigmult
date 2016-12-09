@@ -1,0 +1,38 @@
+<%= form_for(categoriaproduto) do |f| %>
+  <% if categoriaproduto.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(categoriaproduto.errors.count, "error") %> prohibited this categoriaproduto from being saved:</h2>
+
+      <ul>
+      <% categoriaproduto.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+      <%= f.label :nome_categoria %>
+      <%= f.text_field :nome_categoria, :class => "form-control" %>
+    </div>
+   </div>
+</div>
+
+ </div><!-- /.box-body -->
+</div><!-- /.box -->
+
+<div class="row mar-bot40">
+ <div class="col-lg-8" >
+    <div class="btn-group">
+      <button type="submit" value="Submit" class="btn btn-primary btn-sm">
+       <span class="glyphicon glyphicon-floppy-disk"></span> Salvar
+      </button>
+      <%= link_to categoriaprodutos_path, :class => "btn btn-default btn-sm" do %>
+         <span class="glyphicon glyphicon-arrow-left"></span> Voltar
+       <% end %>
+     </div>
+   </div>
+</div>
+<% end %>

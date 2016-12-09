@@ -1,0 +1,1 @@
+json.array! @categoriaempresas, partial: 'categoriaempresas/categoriaempresa', as: :categoriaempresa

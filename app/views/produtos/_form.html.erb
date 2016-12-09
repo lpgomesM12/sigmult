@@ -1,0 +1,134 @@
+<%= form_for(produto) do |f| %>
+  <% if produto.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(produto.errors.count, "error") %> prohibited this produto from being saved:</h2>
+
+      <ul>
+      <% produto.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <label>Categoria</label>
+      <%= f.select :categoriaproduto_id, options_from_collection_for_select(Categoriaproduto.all, 'id', 'nome_categoria'), {}, {:class => 'form-control'}%>
+  </div><!-- /.form-group -->
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+        <label>Nome Produto</label>
+        <%= f.text_field :nome_produto, :class => "form-control " %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+      <div class="form-group">
+        <label>Qtd. Minima Estoque</label>
+        <%= f.text_field :qtd_estoqueminimo, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label>Qtd. Máxima Estoque</label>
+      <%= f.text_field :qtd_estoquemaximo, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label>Marca</label>
+      <%= f.text_field :nome_marca, :class => "form-control" %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group">
+      <label>Valor Custo R$</label>
+      <%= f.text_field :valor_custo, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label>Valor Venda R$</label>
+      <%= f.text_field :valor_venda, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label>Código de Barras</label>
+      <%= f.text_field :cod_barras, :class => "form-control" %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group">
+        <label>Unidade Medida</label>
+       <%= f.text_field :desc_unidademedida, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+        <label>Peso Kg</label>
+       <%= f.text_field :peso_kilograma, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+        <label>Tamanho</label>
+       <%= f.text_field :desc_tamanho, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+        <label>Status</label>
+       <%= f.collection_select :status, Produto::STATUS, :to_s, :humanize,{},{ :class => 'form-control'}%>
+
+    </div>
+  </div>
+</div>
+
+
+<%= f.hidden_field :user_inclusao, :value=> current_user.id%>
+
+<div class="row">
+    <div class="col-lg-12">
+      <div class="form-group">
+          <label>Observação</label>
+          <%= f.text_area :desc_observacao, :class => "form-control" %>
+      </div>
+   </div>
+</div>
+
+</div><!-- /.box-body -->
+</div><!-- /.box -->
+
+
+<div class="row mar-bot40">
+ <div class="col-lg-8" >
+    <div class="btn-group">
+      <button type="submit" value="Submit" class="btn btn-primary btn-sm">
+       <span class="glyphicon glyphicon-floppy-disk"></span> Salvar
+      </button>
+      <%= link_to produtos_path, :class => "btn btn-default btn-sm" do %>
+         <span class="glyphicon glyphicon-arrow-left"></span> Voltar
+       <% end %>
+     </div>
+   </div>
+</div>
+
+<% end %>
+
+
+<script type="text/javascript">
+  $(".select2").select2();
+</script>

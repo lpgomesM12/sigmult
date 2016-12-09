@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Movimentacaoprodutos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Qtd produto</th>
+      <th>Tipo movimentacao</th>
+      <th>Valor movimentacao</th>
+      <th>Produto</th>
+      <th>Data exclusao</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @movimentacaoprodutos.each do |movimentacaoproduto| %>
+      <tr>
+        <td><%= movimentacaoproduto.qtd_produto %></td>
+        <td><%= movimentacaoproduto.tipo_movimentacao %></td>
+        <td><%= movimentacaoproduto.valor_movimentacao %></td>
+        <td><%= movimentacaoproduto.produto %></td>
+        <td><%= movimentacaoproduto.data_exclusao %></td>
+        <td><%= link_to 'Show', movimentacaoproduto %></td>
+        <td><%= link_to 'Edit', edit_movimentacaoproduto_path(movimentacaoproduto) %></td>
+        <td><%= link_to 'Destroy', movimentacaoproduto, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Movimentacaoproduto', new_movimentacaoproduto_path %>

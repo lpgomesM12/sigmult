@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  qtd_produto: 1
+  tipo_movimentacao: MyString
+  valor_movimentacao: 9.99
+  produto: one
+  data_exclusao: 2016-12-09 07:10:47
+
+two:
+  qtd_produto: 1
+  tipo_movimentacao: MyString
+  valor_movimentacao: 9.99
+  produto: two
+  data_exclusao: 2016-12-09 07:10:47

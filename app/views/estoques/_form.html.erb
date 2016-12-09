@@ -1,0 +1,27 @@
+<%= form_for(estoque) do |f| %>
+  <% if estoque.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(estoque.errors.count, "error") %> prohibited this estoque from being saved:</h2>
+
+      <ul>
+      <% estoque.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :qtd_produto %>
+    <%= f.number_field :qtd_produto %>
+  </div>
+
+  <div class="field">
+    <%= f.label :produto_id %>
+    <%= f.text_field :produto_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
