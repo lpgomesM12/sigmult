@@ -1,0 +1,47 @@
+<%= form_for(contabank) do |f| %>
+  <% if contabank.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(contabank.errors.count, "error") %> prohibited this contabank from being saved:</h2>
+
+      <ul>
+      <% contabank.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nome_banco %>
+    <%= f.text_field :nome_banco %>
+  </div>
+
+  <div class="field">
+    <%= f.label :nome_conta %>
+    <%= f.text_field :nome_conta %>
+  </div>
+
+  <div class="field">
+    <%= f.label :numr_agencia %>
+    <%= f.text_field :numr_agencia %>
+  </div>
+
+  <div class="field">
+    <%= f.label :numr_conta %>
+    <%= f.text_field :numr_conta %>
+  </div>
+
+  <div class="field">
+    <%= f.label :empresa_id %>
+    <%= f.text_field :empresa_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :data_exclusao %>
+    <%= f.datetime_select :data_exclusao %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

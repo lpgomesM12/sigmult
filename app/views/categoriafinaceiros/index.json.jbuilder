@@ -1,0 +1,1 @@
+json.array! @categoriafinaceiros, partial: 'categoriafinaceiros/categoriafinaceiro', as: :categoriafinaceiro

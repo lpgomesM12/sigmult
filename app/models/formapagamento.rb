@@ -1,0 +1,2 @@
+class Formapagamento < ApplicationRecord
+end

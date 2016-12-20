@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nome banco:</strong>
+  <%= @contabank.nome_banco %>
+</p>
+
+<p>
+  <strong>Nome conta:</strong>
+  <%= @contabank.nome_conta %>
+</p>
+
+<p>
+  <strong>Numr agencia:</strong>
+  <%= @contabank.numr_agencia %>
+</p>
+
+<p>
+  <strong>Numr conta:</strong>
+  <%= @contabank.numr_conta %>
+</p>
+
+<p>
+  <strong>Empresa:</strong>
+  <%= @contabank.empresa %>
+</p>
+
+<p>
+  <strong>Data exclusao:</strong>
+  <%= @contabank.data_exclusao %>
+</p>
+
+<%= link_to 'Edit', edit_contabank_path(@contabank) %> |
+<%= link_to 'Back', contabanks_path %>

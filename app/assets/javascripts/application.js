@@ -31,7 +31,8 @@
 //= require plugins/morris/morris.min
 //= require plugins/datatables/dataTables.bootstrap.min
 //= require plugins/select2/select2.full.min
-
+//= require cocoon
+//= require jquery-ui
 
 
 $(document).ready(function() {

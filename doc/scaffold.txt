@@ -16,3 +16,17 @@ MOVIMENTACAOPRODUTO
 rails g scaffold movimentacaoproduto qtd_produto:integer tipo_movimentacao:string valor_movimentacao:decimal produto:references data_exclusao:datetime
 ESTOQUE
 rails g scaffold estoque qtd_produto:integer produto:references
+FORNECEDOR
+rails g scaffold fornecedor nome_fornecedor:string desc_cnpj:string endereco:references empresa:references
+TELEFONEFORNECEDOR
+rails g model telefonefornecedor desc_telefone:string desc_tipo:string fornecedor:references
+UNIDADEMEDIDA
+rails g scaffold unidademedida nome_unidade:string empresa:references
+CONTA
+rails g scaffold contabank nome_banco:string nome_conta:string numr_agencia:string numr_conta:string empresa:references data_exclusao:datetime
+FORMAPAGAMENTO
+rails g scaffold formapagamento nome_formapagamento:string
+TIPOMOVIFINANCEIRO
+rails g scaffold tipomovifinanceiro nome_movimento:string
+CATEGORIAFINA
+rails g scaffold categoriafinaceiro nome_categoria:string references:empresa 

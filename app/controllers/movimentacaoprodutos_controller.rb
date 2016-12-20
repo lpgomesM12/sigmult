@@ -1,6 +1,39 @@
 class MovimentacaoprodutosController < ApplicationController
   before_action :set_movimentacaoproduto, only: [:show, :edit, :update, :destroy]
 
+  def entrada
+
+    @valor_custo = params[:valr_custo]
+    @valor_custo = @valor_custo.gsub('R$', '')
+    @valor_custo = @valor_custo.gsub('.', '')
+    @valor_custo = @valor_custo.gsub(',', '.').to_f
+
+    @movimentacaoproduto = Movimentacaoproduto.new()
+    @movimentacaoproduto.qtd_produto = params[:qtd_produto]
+    @movimentacaoproduto.tipo_movimentacao = params[:tipo_movimentacao]
+    @movimentacaoproduto.produto_id = params[:produto_id]
+    @movimentacaoproduto.fornecedor_id = params[:fornecedor_id]
+    @movimentacaoproduto.user_inclusao = current_user.id
+    @movimentacaoproduto.empresa_id = current_user.empresa_id
+    @movimentacaoproduto.valor_movimentacao = @valor_custo
+
+    @movimentacaoproduto.save
+
+    render :json => true
+  end
+
+  def saida
+    @movimentacaoproduto = Movimentacaoproduto.new()
+    @movimentacaoproduto.qtd_produto = params[:qtd_produto_saida]
+    @movimentacaoproduto.tipo_movimentacao = params[:tipo_movimentacao]
+    @movimentacaoproduto.produto_id = params[:id_produto_saida]
+    @movimentacaoproduto.desc_observacao = params[:observacao]
+    @movimentacaoproduto.empresa_id = current_user.empresa_id
+    @movimentacaoproduto.user_inclusao = current_user.id
+    @movimentacaoproduto.save
+
+    render :json => true
+  end
   # GET /movimentacaoprodutos
   # GET /movimentacaoprodutos.json
   def index
@@ -69,6 +102,6 @@ class MovimentacaoprodutosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def movimentacaoproduto_params
-      params.require(:movimentacaoproduto).permit(:qtd_produto, :tipo_movimentacao, :valor_movimentacao, :produto_id, :data_exclusao, :user_inclusao, :user_exclusao)
+      params.require(:movimentacaoproduto).permit(:qtd_produto, :tipo_movimentacao, :valor_movimentacao, :produto_id, :data_exclusao, :user_inclusao, :user_exclusao, :empresa_id, :fornecedor_id, :desc_observacao)
     end
 end

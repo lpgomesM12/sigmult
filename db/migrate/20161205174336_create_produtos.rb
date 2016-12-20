@@ -14,9 +14,9 @@ class CreateProdutos < ActiveRecord::Migration[5.0]
       t.string :desc_tamanho
       t.string :status
       t.string :peso_kilograma
-      t.string :desc_unidademedida
       t.integer :user_inclusao, :integer, :references => :User, index: true
       t.integer :user_exclusao, :integer, :references => :User, index: true
+      t.references :empresa, foreign_key: true
 
       t.timestamps
     end

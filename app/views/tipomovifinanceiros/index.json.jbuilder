@@ -1,0 +1,1 @@
+json.array! @tipomovifinanceiros, partial: 'tipomovifinanceiros/tipomovifinanceiro', as: :tipomovifinanceiro

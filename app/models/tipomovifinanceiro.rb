@@ -1,0 +1,2 @@
+class Tipomovifinanceiro < ApplicationRecord
+end

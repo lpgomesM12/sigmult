@@ -1,13 +1,28 @@
 <section class="content">
 
-  <section class="content-header">
-    <%if notice %>
-         <div class="alert alert-success alert-dismissible">
+  <%if notice %>
+      <div class="alert alert-success alert-dismissible">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
            <%= notice %>
-         </div>
-      <%end%>
-  </section>
+      </div>
+  <%end%>
+
+  <div class="panel panel-default">
+        <div class="panel-body">
+          <%= form_tag nil, method: 'GET' do %>
+              <div class="row">
+                      <div class="col-md-12">
+                        <div class="input-group">
+                          <input id="q" name="q" type="text" value="<%=@q%>" class="form-control" placeholder="Pesquise nome do produto">
+                          <span class="input-group-btn">
+                            <button class="btn btn-success" type="submit" >Buscar</button>
+                          </span>
+                        </div><!-- /input-group -->
+                      </div><!-- /.col-lg-6 -->
+                </div><!-- /.row -->
+          <% end %>
+        </div>
+    </div>
 
   <div class="box box-primary">
     <div class="box-header with-border">
@@ -32,15 +47,12 @@
 
        <td align='right'>
         <div class="btn-group">
-            <%= link_to estoque, class: "btn btn-default btn-sm", title: 'Exibir', data: { toggle: 'tooltip', placement: 'top'} do %>
-              <span class="glyphicon glyphicon-list-alt text-success"></span>
-            <% end %>
-            <%= link_to edit_estoque_path(estoque) , class: "btn btn-default btn-sm", title: 'Editar', data: { toggle: 'tooltip', placement: 'top'} do %>
-              <span class="glyphicon glyphicon-pencil text-primary"></span>
-            <% end %>
-           <%= link_to estoque, method: :delete, data: { confirm: 'Deseja excluir o registro?', toggle: 'tooltip', placement: 'top'}, class: "btn btn-default btn-sm", title: 'Excluír' do %>
-              <span class="glyphicon glyphicon-trash text-danger"></span>
-            <% end %>
+            <button type="button" onclick="modalSaida('<%=estoque.produto_id%>','<%=estoque.produto.nome_produto%>')" name="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="left">
+              <span class="glyphicon glyphicon glyphicon-minus"></span> Saída
+            </button>
+            <button type="button" onclick="modalEntrada('<%=estoque.produto_id%>','<%=estoque.produto.nome_produto%>')" name="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="left">
+              <span class="glyphicon glyphicon glyphicon-plus"></span> Entrada
+            </button>
          </div>
       </td>
     </tr>
@@ -51,3 +63,190 @@
 </div><!-- /.box -->
 
 <br>
+
+<!-- Modal -->
+<!-- Modal -->
+<div id="myModalSaida" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Saída Produto</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Produto</label>
+                <label id="nome_produto_saida" style="color:#3c8dbc"></label>
+                <input type="hidden" name="id_produto_saida" id="id_produto_saida">
+            </div>
+           </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+              <label>Quantidade Entrada</label>
+              <input type="text" class="form-control" name="qtd_produto_saida" id="qtd_produto_saida">
+            </div>
+           </div>
+           <div class="col-md-12">
+             <div class="form-group">
+             <label>Observação</label>
+             <textarea type="textarea" rows="3" cols="50" class="form-control" name="observacao" id="observacao">
+             </textarea>
+           </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal" onclick="saida_produto('SAIDA')">Salvar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Sair</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="myModalEntrada" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Entrada produto</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+
+          <div class="col-md-12">
+            <div class="form-group">
+            <label>Produto:</label>
+            <label id="nome_produto_entrada" style="color:#3c8dbc"></label>
+            <input type="hidden" name="id_produto" id="id_produto">
+          </div>
+         </div>
+
+         <div class="col-md-12">
+          <div class="form-group">
+             <input type="text" name="nome_fornecedor" id="nome_fornecedor" class="form-control" placeholder="Pesquise pelo Cliente" onfocus="javascript:$(this).autocomplete('search','')">
+             <input type="hidden" name="fornecedor_id"  id="fornecedor_id">
+           </div>
+         </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+              <label>Quantidade Entrada</label>
+              <input type="text" class="form-control"  id="qtd_produto_entrada" name="qtd_produto_entrada">
+            </div>
+           </div>
+           <div class="col-md-6">
+             <div class="form-group">
+             <label>Valor Custo Unidade</label>
+             <input type="text" class="form-control" name="valor_custo" id="valor_custo">
+           </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" onclick="entrada_produto('ENTRADA')">Salvar</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Sair</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style media="screen">
+.ui-autocomplete {
+    z-index: 5000;
+}
+
+</style>
+
+<script type="text/javascript">
+
+// chama modal saida e seta valores padrão
+  function modalSaida(id,produto) {
+
+    $('#qtd_produto_saida').val('');
+    $('#observacao').val('');
+
+     $('#nome_produto_saida').text(produto);
+     $('#id_produto_saida').val(id);
+     $('#myModalSaida').modal('show');
+    }
+    //chama modal de entrada e seta valores padrão
+   function modalEntrada(id,produto) {
+
+     $('#qtd_produto_entrada').val('');
+     $('#valor_custo').val('');
+
+     $('#nome_produto_entrada').text(produto);
+     $('#id_produto').val(id);
+     $('#myModalEntrada').modal('show');
+  }
+
+  //função saida produstos empresa
+function entrada_produto(tipo_movimentacao){
+         $.ajax({
+          url: '/entradaEstoque',
+          data : {
+              tipo_movimentacao:  tipo_movimentacao,
+              qtd_produto: $('#qtd_produto_entrada').val(),
+              produto_id: $('#id_produto').val(),
+              fornecedor_id: $('#fornecedor_id').val(),
+              valr_custo: $('#valor_custo').val(),
+          },
+         success: function(data){
+             location.reload();
+         }
+    })
+ };
+
+ //função saida produto estoque
+function saida_produto(tipo_movimentacao){
+        $.ajax({
+         url: 'saidaEstoque',
+         data : {
+             tipo_movimentacao:  tipo_movimentacao,
+             qtd_produto_saida: $('#qtd_produto_saida').val(),
+             id_produto_saida: $('#id_produto_saida').val(),
+             observacao: $('#observacao').val(),
+         },
+        success: function(data){
+            location.reload();
+        }
+   })
+};
+
+//Buscar fornecedor por nome. pesquisa modal entrada produto
+ $(document).ready(function() {
+    $('#nome_fornecedor').autocomplete({
+    source: '/buscafornecedor',
+    dataType: 'json',
+    minLength: 0,
+    change: function(event, ui) {
+    if (!ui.item) {
+    $('#nome_fornecedor').val('');
+  }
+ },
+
+ select: function(event, ui) {
+ if (ui.item) {
+      $("#fornecedor_id").val(ui.item.id);
+       }
+    }
+   });
+ });
+
+ $(function() {
+  $("#valor_custo").maskMoney({showSymbol:true, symbol:"R$", decimal:",", thousands:"."});
+})
+
+</script>

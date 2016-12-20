@@ -1,0 +1,1 @@
+json.partial! "categoriafinaceiros/categoriafinaceiro", categoriafinaceiro: @categoriafinaceiro

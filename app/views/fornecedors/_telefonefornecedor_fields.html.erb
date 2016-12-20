@@ -1,0 +1,17 @@
+<div class='nested-fields'>
+ <div class="row">
+    <div class="col-lg-3">
+      <%= f.label :Tipo_contato %>
+      <%= f.collection_select :desc_tipo, Fornecedor::TIPOCONTATO, :to_s, :humanize,{},{ :class => 'form-control' }%>
+      <%#= f.collection_select :tipo, Empresa::TIPOTELEFONE, :to_s, :humanize, {}, {:class => "form-control"}%>
+    </div>
+   <div class="col-lg-3">
+      <%= f.label :Telefone %>
+      <%= f.text_field :desc_telefone, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-2">
+     <label>Ação</label><br>
+     <%= link_to_remove_association "Deletar", f, :class => "btn btn-default" %>
+    </div>
+   </div>
+</div>

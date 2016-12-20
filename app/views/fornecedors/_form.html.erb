@@ -1,0 +1,117 @@
+<%= form_for(fornecedor) do |f| %>
+  <% if fornecedor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(fornecedor.errors.count, "error") %> prohibited this fornecedor from being saved:</h2>
+
+      <ul>
+      <% fornecedor.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+   <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+         <%= f.label :nome_fornecedor %>
+         <%= f.text_field :nome_fornecedor, :class => "form-control" %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+         <label> CNPJ</label>
+         <%= f.text_field :desc_cnpj, :class => "form-control" %>
+        </div>
+      </div>
+   </div>
+
+   <div class="row">
+     <div class="col-md-2">
+       <h4>Telefones</h4>
+     </div>
+    </div>
+   <div id="telefonefornecedors">
+     <%= f.fields_for :telefonefornecedors do |item| %>
+        <%= render 'telefonefornecedor_fields', :f => item %>
+      <% end %>
+       <div class='links'>
+       <br>
+         <%= link_to_add_association 'Adicionar novo contato', f, :telefonefornecedors, :class => "btn btn-default btn-xs" %>
+       </div>
+   </div>
+   <br>
+
+   <%= f.fields_for :endereco do |enderecos| %>
+             <div class="row mar-bot40">
+              <div class="col-lg-12">
+                  <%= enderecos.label :Endereco %><br>
+                  <%= enderecos.text_field :endereco, :class => 'form-control' %>
+                </div>
+             </div>
+             <br>
+          <br>
+          <div class="row mar-bot40">
+            <%=  fields_for :estados do |esta| %>
+                <div class="col-lg-6">
+                  <%= esta.label :Estado %><br>
+                  <%= esta.select :estado_id, options_from_collection_for_select(Estado.all, 'id', 'nome_estado',@fornecedor.endereco_id? ? @fornecedor.endereco.cidade.estado_id : 0), {:include_blank => true}, {:onchange => 'changeState(this)', :class => 'form-control' }%>
+                </div>
+            <%end%>
+            <%if @fornecedor.id %>
+                  <div class="col-lg-6">
+                    <%= enderecos.label :Cidade %>
+                    <%= enderecos.select :cidade_id, options_from_collection_for_select(Cidade.where(estado_id: @fornecedor.endereco.cidade.estado_id), 'id', 'nome_cidade',@fornecedor.endereco.cidade.id),{}, :class => 'form-control'%>
+                  </div>
+            <%else%>
+            <div class="col-lg-6">
+                    <%= enderecos.label :Cidade %><br>
+                    <%= enderecos.select :cidade_id, [], {}, {:class => 'form-control'}%>
+            </div>
+             <%end%>
+           </div>
+       <%end%>
+
+<%= f.hidden_field :empresa_id, :value=> current_user.empresa_id%>
+
+</div><!-- /.box-body -->
+</div><!-- /.box -->
+
+
+<div class="row mar-bot40">
+<div class="col-lg-8" >
+   <div class="btn-group">
+     <button type="submit" value="Submit" class="btn btn-primary btn-sm">
+      <span class="glyphicon glyphicon-floppy-disk"></span> Salvar
+     </button>
+     <%= link_to fornecedors_path, :class => "btn btn-default btn-sm" do %>
+        <span class="glyphicon glyphicon-arrow-left"></span> Voltar
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
+
+
+<script type="text/javascript">
+
+function changeState(state){
+    $.ajax({
+      url: '<%= listarCidade_path %>',
+      data : {id : state.value},
+      success: function(data){
+        $('#fornecedor_endereco_attributes_cidade_id').empty();
+        $('#fornecedor_endereco_attributes_cidade_id').html('<option>Carregando...</option>');
+        $('#fornecedor_endereco_attributes_cidade_id').attr('disabled', 'disabled');
+        var options = "";
+        for (var i in data) {
+          var item = data[i];
+          options += "<option value='"+item.id+"'>"+item.nome+"</option>"
+        };
+
+        $('#fornecedor_endereco_attributes_cidade_id').html(options);
+        $('#fornecedor_endereco_attributes_cidade_id').removeAttr('disabled');
+      }
+    })
+  }
+</script>

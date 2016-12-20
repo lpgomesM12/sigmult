@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nome_fornecedor: MyString
+  desc_cnpj: MyString
+  endereco: one
+  empresa: one
+
+two:
+  nome_fornecedor: MyString
+  desc_cnpj: MyString
+  endereco: two
+  empresa: two

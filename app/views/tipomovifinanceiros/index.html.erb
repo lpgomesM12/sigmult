@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tipomovifinanceiros</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome movimento</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tipomovifinanceiros.each do |tipomovifinanceiro| %>
+      <tr>
+        <td><%= tipomovifinanceiro.nome_movimento %></td>
+        <td><%= link_to 'Show', tipomovifinanceiro %></td>
+        <td><%= link_to 'Edit', edit_tipomovifinanceiro_path(tipomovifinanceiro) %></td>
+        <td><%= link_to 'Destroy', tipomovifinanceiro, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tipomovifinanceiro', new_tipomovifinanceiro_path %>

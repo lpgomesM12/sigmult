@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nome_banco: MyString
+  nome_conta: MyString
+  numr_agencia: MyString
+  numr_conta: MyString
+  empresa: one
+  data_exclusao: 2016-12-20 16:18:56
+
+two:
+  nome_banco: MyString
+  nome_conta: MyString
+  numr_agencia: MyString
+  numr_conta: MyString
+  empresa: two
+  data_exclusao: 2016-12-20 16:18:56

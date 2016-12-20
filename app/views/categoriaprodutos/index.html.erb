@@ -1,21 +1,22 @@
 <section class="content">
 
-  <section class="content-header">
-    <%if notice %>
-         <div class="alert alert-success alert-dismissible">
-          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-           <%= notice %>
-         </div>
-      <%end%>
-  </section>
-
-  <div class="row">
-          <div class="col-lg-6">
-            <%= link_to new_categoriaproduto_path, class: "btn btn-primary btn-sm" do %>
-                   <span class="glyphicon glyphicon-plus"></span> Nova Categoria
-            <% end %>
-          </div>
-    </div><!-- /.row -->
+  <%if notice %>
+       <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+         <%= notice %>
+       </div>
+    <%end%>
+<div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+                <div class="col-lg-6">
+                  <%= link_to new_categoriaproduto_path, class: "btn btn-primary" do %>
+                         <span class="glyphicon glyphicon-plus"></span> Nova Categoria
+                  <% end %>
+                </div>
+          </div><!-- /.row -->
+      </div>
+</div>
 
   <div class="box box-primary">
     <div class="box-header with-border">

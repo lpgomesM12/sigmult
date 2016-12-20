@@ -1,0 +1,27 @@
+<%= form_for(categoriafinaceiro) do |f| %>
+  <% if categoriafinaceiro.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(categoriafinaceiro.errors.count, "error") %> prohibited this categoriafinaceiro from being saved:</h2>
+
+      <ul>
+      <% categoriafinaceiro.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nome_categoria %>
+    <%= f.text_field :nome_categoria %>
+  </div>
+
+  <div class="field">
+    <%= f.label :empresa_id %>
+    <%= f.text_field :empresa_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

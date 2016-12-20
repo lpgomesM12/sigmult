@@ -1,0 +1,1 @@
+json.array! @contabanks, partial: 'contabanks/contabank', as: :contabank

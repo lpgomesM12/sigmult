@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161209092348) do
+ActiveRecord::Schema.define(version: 20161220184121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,12 +22,24 @@ ActiveRecord::Schema.define(version: 20161209092348) do
     t.datetime "updated_at",     null: false
   end
 
-  create_table "categoriaprodutos", force: :cascade do |t|
+  create_table "categoriafinaceiros", force: :cascade do |t|
     t.string   "nome_categoria"
+    t.integer  "empresa_id"
     t.integer  "father_id"
     t.integer  "integer"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.index ["empresa_id"], name: "index_categoriafinaceiros_on_empresa_id", using: :btree
+  end
+
+  create_table "categoriaprodutos", force: :cascade do |t|
+    t.string   "nome_categoria"
+    t.integer  "father_id"
+    t.integer  "integer"
+    t.integer  "empresa_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["empresa_id"], name: "index_categoriaprodutos_on_empresa_id", using: :btree
   end
 
   create_table "cidades", force: :cascade do |t|
@@ -37,6 +49,22 @@ ActiveRecord::Schema.define(version: 20161209092348) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["estado_id"], name: "index_cidades_on_estado_id", using: :btree
+  end
+
+  create_table "contabanks", force: :cascade do |t|
+    t.string   "nome_banco"
+    t.string   "nome_conta"
+    t.string   "numr_agencia"
+    t.string   "numr_conta"
+    t.integer  "empresa_id"
+    t.datetime "data_exclusao"
+    t.integer  "user_inclusao"
+    t.integer  "user_exclusao"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["empresa_id"], name: "index_contabanks_on_empresa_id", using: :btree
+    t.index ["user_exclusao"], name: "index_contabanks_on_user_exclusao", using: :btree
+    t.index ["user_inclusao"], name: "index_contabanks_on_user_inclusao", using: :btree
   end
 
   create_table "empresas", force: :cascade do |t|
@@ -74,23 +102,45 @@ ActiveRecord::Schema.define(version: 20161209092348) do
   create_table "estoques", force: :cascade do |t|
     t.integer  "qtd_produto"
     t.integer  "produto_id"
+    t.integer  "empresa_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["empresa_id"], name: "index_estoques_on_empresa_id", using: :btree
     t.index ["produto_id"], name: "index_estoques_on_produto_id", using: :btree
+  end
+
+  create_table "formapagamentos", force: :cascade do |t|
+    t.string   "nome_formapagamento"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  create_table "fornecedors", force: :cascade do |t|
+    t.string   "nome_fornecedor"
+    t.string   "desc_cnpj"
+    t.integer  "endereco_id"
+    t.integer  "empresa_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["empresa_id"], name: "index_fornecedors_on_empresa_id", using: :btree
+    t.index ["endereco_id"], name: "index_fornecedors_on_endereco_id", using: :btree
   end
 
   create_table "movimentacaoprodutos", force: :cascade do |t|
     t.integer  "qtd_produto"
     t.string   "tipo_movimentacao"
     t.decimal  "valor_movimentacao", precision: 10, scale: 2
+    t.string   "desc_observacao"
     t.integer  "produto_id"
     t.datetime "data_exclusao"
     t.integer  "user_inclusao"
-    t.integer  "integer"
     t.integer  "user_exclusao"
+    t.integer  "empresa_id"
+    t.integer  "fornecedor_id"
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
-    t.index ["integer"], name: "index_movimentacaoprodutos_on_integer", using: :btree
+    t.index ["empresa_id"], name: "index_movimentacaoprodutos_on_empresa_id", using: :btree
+    t.index ["fornecedor_id"], name: "index_movimentacaoprodutos_on_fornecedor_id", using: :btree
     t.index ["produto_id"], name: "index_movimentacaoprodutos_on_produto_id", using: :btree
     t.index ["user_exclusao"], name: "index_movimentacaoprodutos_on_user_exclusao", using: :btree
     t.index ["user_inclusao"], name: "index_movimentacaoprodutos_on_user_inclusao", using: :btree
@@ -114,12 +164,39 @@ ActiveRecord::Schema.define(version: 20161209092348) do
     t.integer  "user_inclusao"
     t.integer  "integer"
     t.integer  "user_exclusao"
+    t.integer  "empresa_id"
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
+    t.integer  "unidademedida_id"
     t.index ["categoriaproduto_id"], name: "index_produtos_on_categoriaproduto_id", using: :btree
+    t.index ["empresa_id"], name: "index_produtos_on_empresa_id", using: :btree
     t.index ["integer"], name: "index_produtos_on_integer", using: :btree
+    t.index ["unidademedida_id"], name: "index_produtos_on_unidademedida_id", using: :btree
     t.index ["user_exclusao"], name: "index_produtos_on_user_exclusao", using: :btree
     t.index ["user_inclusao"], name: "index_produtos_on_user_inclusao", using: :btree
+  end
+
+  create_table "telefonefornecedors", force: :cascade do |t|
+    t.string   "desc_telefone"
+    t.string   "desc_tipo"
+    t.integer  "fornecedor_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["fornecedor_id"], name: "index_telefonefornecedors_on_fornecedor_id", using: :btree
+  end
+
+  create_table "tipomovifinanceiros", force: :cascade do |t|
+    t.string   "nome_movimento"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "unidademedidas", force: :cascade do |t|
+    t.string   "nome_unidade"
+    t.integer  "empresa_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["empresa_id"], name: "index_unidademedidas_on_empresa_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -127,6 +204,7 @@ ActiveRecord::Schema.define(version: 20161209092348) do
     t.string   "email",                  default: "", null: false
     t.string   "role",                   default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
+    t.integer  "empresa_id"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -138,14 +216,28 @@ ActiveRecord::Schema.define(version: 20161209092348) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["empresa_id"], name: "index_users_on_empresa_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "categoriafinaceiros", "empresas"
+  add_foreign_key "categoriaprodutos", "empresas"
   add_foreign_key "cidades", "estados"
+  add_foreign_key "contabanks", "empresas"
   add_foreign_key "empresas", "categoriaempresas"
   add_foreign_key "empresas", "enderecos"
   add_foreign_key "enderecos", "cidades"
+  add_foreign_key "estoques", "empresas"
   add_foreign_key "estoques", "produtos"
+  add_foreign_key "fornecedors", "empresas"
+  add_foreign_key "fornecedors", "enderecos"
+  add_foreign_key "movimentacaoprodutos", "empresas"
+  add_foreign_key "movimentacaoprodutos", "fornecedors"
   add_foreign_key "movimentacaoprodutos", "produtos"
   add_foreign_key "produtos", "categoriaprodutos"
+  add_foreign_key "produtos", "empresas"
+  add_foreign_key "produtos", "unidademedidas"
+  add_foreign_key "telefonefornecedors", "fornecedors"
+  add_foreign_key "unidademedidas", "empresas"
+  add_foreign_key "users", "empresas"
 end

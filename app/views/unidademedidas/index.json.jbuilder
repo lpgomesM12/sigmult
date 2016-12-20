@@ -1,0 +1,1 @@
+json.array! @unidademedidas, partial: 'unidademedidas/unidademedida', as: :unidademedida

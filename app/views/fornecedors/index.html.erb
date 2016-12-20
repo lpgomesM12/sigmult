@@ -1,0 +1,60 @@
+<section class="content">
+  <%if notice %>
+       <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+         <%= notice %>
+       </div>
+    <%end%>
+<div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+                <div class="col-lg-6">
+                  <%= link_to new_fornecedor_path, class: "btn btn-primary" do %>
+                         <span class="glyphicon glyphicon-plus"></span> Novo Fornecedor
+                  <% end %>
+                </div>
+          </div><!-- /.row -->
+      </div>
+</div>
+
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Fornecedores</h3>
+     </div><!-- /.box-header -->
+  <div class="box-body table-responsive no-padding">
+    <table class="table table-striped table-bordered table-hover table-condensed">
+      <thead>
+  <thead>
+    <tr>
+      <th>Nome fornecedor</th>
+      <th>CNPJ</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @fornecedors.each do |fornecedor| %>
+      <tr>
+        <td><%= fornecedor.nome_fornecedor %></td>
+        <td><%= fornecedor.desc_cnpj %></td>
+
+       <td align='right'>
+        <div class="btn-group">
+            <%= link_to fornecedor, class: "btn btn-default btn-sm", title: 'Exibir', data: { toggle: 'tooltip', placement: 'top'} do %>
+              <span class="glyphicon glyphicon-list-alt text-success"></span>
+            <% end %>
+            <%= link_to  edit_fornecedor_path(fornecedor) , class: "btn btn-default btn-sm", title: 'Editar', data: { toggle: 'tooltip', placement: 'top'} do %>
+              <span class="glyphicon glyphicon-pencil text-primary"></span>
+            <% end %>
+           <%= link_to fornecedor, method: :delete, data: { confirm: 'Deseja excluir o registro?', toggle: 'tooltip', placement: 'top'}, class: "btn btn-default btn-sm", title: 'Excluír' do %>
+              <span class="glyphicon glyphicon-trash text-danger"></span>
+            <% end %>
+         </div>
+      </td>
+    </tr>
+  <% end %>
+</tbody>
+</table>
+</div>
+</div><!-- /.box -->
+
+<br>

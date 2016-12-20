@@ -1,0 +1,27 @@
+<%= form_for(unidademedida) do |f| %>
+  <% if unidademedida.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(unidademedida.errors.count, "error") %> prohibited this unidademedida from being saved:</h2>
+
+      <ul>
+      <% unidademedida.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nome_unidade %>
+    <%= f.text_field :nome_unidade %>
+  </div>
+
+  <div class="field">
+    <%= f.label :empresa_id %>
+    <%= f.text_field :empresa_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

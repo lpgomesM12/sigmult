@@ -69,6 +69,6 @@ class EstoquesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def estoque_params
-      params.require(:estoque).permit(:qtd_produto, :produto_id)
+      params.require(:estoque).permit(:qtd_produto, :produto_id, :empresa_id)
     end
 end

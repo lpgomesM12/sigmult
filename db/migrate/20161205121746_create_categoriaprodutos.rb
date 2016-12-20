@@ -3,6 +3,7 @@ class CreateCategoriaprodutos < ActiveRecord::Migration[5.0]
     create_table :categoriaprodutos do |t|
       t.string :nome_categoria
       t.integer :father_id, :integer, :references => :categoriaprodutos
+      t.references :empresa, foreign_key: true
 
       t.timestamps
     end
