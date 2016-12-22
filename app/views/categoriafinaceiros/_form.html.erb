@@ -11,17 +11,39 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :nome_categoria %>
-    <%= f.text_field :nome_categoria %>
+   <div class="row">
+     <div class="col-md-6">
+         <div class="form-group">
+           <label>Categoria</label>
+           <%= f.select :father_id, options_from_collection_for_select(Categoriafinaceiro.where(empresa_id: current_user.empresa_id), 'id', 'nome_categoria',@sivic_categoriaPai),{:include_blank => true}, {:class => "form-control"}%>
+        </div>
+      </div>
+   </div>
+
+  <div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+        <%= f.label :nome_categoria %>
+        <%= f.text_field :nome_categoria, :class => "form-control" %>
+      </div>
+     </div>
   </div>
 
-  <div class="field">
-    <%= f.label :empresa_id %>
-    <%= f.text_field :empresa_id %>
-  </div>
+</div><!-- /.box-body -->
+</div><!-- /.box -->
 
-  <div class="actions">
-    <%= f.submit %>
+<%= f.hidden_field :empresa_id, :value=> current_user.empresa_id%>
+
+<div class="row mar-bot40">
+<div class="col-lg-8" >
+   <div class="btn-group">
+     <button type="submit" value="Submit" class="btn btn-primary btn-sm">
+      <span class="glyphicon glyphicon-floppy-disk"></span> Salvar
+     </button>
+     <%= link_to categoriafinaceiros_path, :class => "btn btn-default btn-sm" do %>
+        <span class="glyphicon glyphicon-arrow-left"></span> Voltar
+      <% end %>
+    </div>
   </div>
+</div>
 <% end %>

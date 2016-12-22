@@ -1,0 +1,27 @@
+<%= form_for(codvenda) do |f| %>
+  <% if codvenda.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(codvenda.errors.count, "error") %> prohibited this codvenda from being saved:</h2>
+
+      <ul>
+      <% codvenda.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :numr_contador %>
+    <%= f.number_field :numr_contador %>
+  </div>
+
+  <div class="field">
+    <%= f.label :empresa_id %>
+    <%= f.text_field :empresa_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

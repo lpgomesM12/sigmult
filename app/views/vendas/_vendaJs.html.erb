@@ -1,0 +1,65 @@
+<script type="text/javascript">
+/*
+ Neste arquivo deve ficar todo o javascript da funcionalidade tela
+ de vendas
+*/
+
+ //função que busca os produtos autocomplete.
+ $(document).ready(function() {
+    $('#nome_produto').autocomplete({
+    source: '/buscaproduto',
+    dataType: 'json',
+    minLength: 0,
+    change: function(event, ui) {
+    if (!ui.item) {
+    $('#nome_produto').val('');
+  }
+ },
+  //ação quando selecioar um produto da busca
+ select: function(event, ui) {
+  if (ui.item) {
+      $("#produto_id").val(ui.item.id);
+      $("#valor_unitario").val(ui.item.valor_venda);
+    }
+      $("#btnIncluirItem").focus();
+      $("#qtd_produto").val(1);
+    }
+   });
+ });
+
+//Função para criar uma venda
+ function criaVenda() {
+  $.ajax({
+    url: '/criarVenda',
+    data : {},
+    success: function(data){
+      carrega_dados_venda(data);
+     }
+   })
+ };
+
+ //carrega dados da venda
+function carrega_dados_venda(data){
+  $("#venda_id").val(data.id);
+  $("#codigo_venda").val(data.numr_codigo);
+  $("#nome_cliente").val(data.nome_cliente);
+  $("#cliente_id").val(data.cliente_id);
+  $("#situacao").val(data.situacao);
+  $("#nome_formapagamento").val(data.nome_formapagamento);
+  $("#formapagamento_id").val(data.formapagamento_id);
+  $("#valr_total").val(data.valr_total);
+  $("#btnIncluirItem").prop( "disabled", false )
+ }
+
+//Função para incluir item na venda
+function incluiItem() {
+  console.log("Inclusão realizada com sucesso");
+};
+
+//Setando mascara dinheiro para campos valores
+ $(function() {
+  $("#valor_unitario").maskMoney({showSymbol:true, symbol:"R$", decimal:",", thousands:"."});
+})
+
+
+</script>

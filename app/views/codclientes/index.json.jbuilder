@@ -1,0 +1,1 @@
+json.array! @codclientes, partial: 'codclientes/codcliente', as: :codcliente

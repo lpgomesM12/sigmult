@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cliente: one
+  data_exclusao: 2016-12-21 16:28:28
+  empresa: one
+  valr_desconto: 9.99
+  valr_venda: 9.99
+  valr_total: 9.99
+  situacao: MyString
+  formapagamento: one
+
+two:
+  cliente: two
+  data_exclusao: 2016-12-21 16:28:28
+  empresa: two
+  valr_desconto: 9.99
+  valr_venda: 9.99
+  valr_total: 9.99
+  situacao: MyString
+  formapagamento: two

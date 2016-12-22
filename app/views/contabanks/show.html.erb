@@ -1,4 +1,21 @@
-<p id="notice"><%= notice %></p>
+<section class="content-header">
+    <%if notice%>
+        <div class="alert alert-success alert-dismissible">
+         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <%= notice %>
+        </div>
+      <%end%>
+</section>
+
+<!-- Main content -->
+<section class="content">
+ <!-- Small boxes (Stat box) -->
+<div class="box box-primary">
+   <div class="box-header with-border">
+      <h3 class="box-title">Conta</h3>
+    </div><!-- /.box-header -->
+<form role="form">
+<div class="box-body">
 
 <p>
   <strong>Nome banco:</strong>
@@ -20,15 +37,16 @@
   <%= @contabank.numr_conta %>
 </p>
 
-<p>
-  <strong>Empresa:</strong>
-  <%= @contabank.empresa %>
-</p>
 
-<p>
-  <strong>Data exclusao:</strong>
-  <%= @contabank.data_exclusao %>
-</p>
+</div><!-- /.box -->
+</form>
+</div><!-- /.box-body -->
 
-<%= link_to 'Edit', edit_contabank_path(@contabank) %> |
-<%= link_to 'Back', contabanks_path %>
+<div class="btn-group">
+<%= link_to edit_contabank_path(@contabank), :class => "btn btn-default btn-sm" do %>
+   <span class="glyphicon glyphicon-pencil"></span> Editar
+<% end %>
+<%= link_to contabanks_path, :class => "btn btn-default btn-sm" do %>
+    <span class="glyphicon glyphicon-arrow-left"></span> Voltar
+<% end %>
+</div>

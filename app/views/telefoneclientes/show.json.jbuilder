@@ -1,0 +1,1 @@
+json.partial! "telefoneclientes/telefonecliente", telefonecliente: @telefonecliente

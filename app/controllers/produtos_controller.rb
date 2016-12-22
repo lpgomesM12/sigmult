@@ -1,6 +1,17 @@
 class ProdutosController < ApplicationController
   before_action :set_produto, only: [:show, :edit, :update, :destroy]
 
+  include ActionView::Helpers::NumberHelper
+
+ def busca
+   @produtos = Produto.search(params[:term],current_user.empresa_id).limit(15)
+
+   @produtos.each do |produto|
+     produto.valr_unitario = number_to_currency(produto.valor_custo , unit: "", separator: ",", delimiter: "")
+   end
+
+ end
+
   # GET /produtos
   # GET /produtos.json
   def index

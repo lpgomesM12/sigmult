@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Codvendas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Numr contador</th>
+      <th>Empresa</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @codvendas.each do |codvenda| %>
+      <tr>
+        <td><%= codvenda.numr_contador %></td>
+        <td><%= codvenda.empresa %></td>
+        <td><%= link_to 'Show', codvenda %></td>
+        <td><%= link_to 'Edit', edit_codvenda_path(codvenda) %></td>
+        <td><%= link_to 'Destroy', codvenda, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Codvenda', new_codvenda_path %>

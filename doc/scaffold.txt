@@ -29,4 +29,16 @@ rails g scaffold formapagamento nome_formapagamento:string
 TIPOMOVIFINANCEIRO
 rails g scaffold tipomovifinanceiro nome_movimento:string
 CATEGORIAFINA
-rails g scaffold categoriafinaceiro nome_categoria:string references:empresa 
+rails g scaffold categoriafinaceiro nome_categoria:string references:empresa
+CLIENTE
+rails g scaffold cliente nome_cliente:string cpf:string endereco:references data_exclusao:datetime
+TELEFONECLIENTE
+rails g scaffold telefonecliente desc_telefone:string tipo_telefone:string cliente:references
+VENDA
+rails g scaffold venda cliente:references data_exclusao:datetime empresa:references valr_desconto:decimal valr_venda:decimal valr_total:decimal situacao:string formapagamento:references
+ITENVENDA
+rails g scaffold itenvenda valor_unitario:decimal qtd_item:integer valr_total:decimal venda:references produto:references
+CODCLIENTE
+rails g scaffold codcliente numr_codigo:integer empresa:references
+CODVENDA
+rails g scaffold codvenda numr_contador:integer empresa:references

@@ -1,0 +1,1 @@
+json.partial! "itenvendas/itenvenda", itenvenda: @itenvenda

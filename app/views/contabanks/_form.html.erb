@@ -11,37 +11,58 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :nome_banco %>
-    <%= f.text_field :nome_banco %>
-  </div>
+<div class="row">
+  <div class="col-md-6">
+        <div class="form-group">
+        <%= f.label :Banco %>
+        <%= f.text_field :nome_banco, :class => "form-control" %>
+      </div>
+   </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+        <div class="form-group">
+        <%= f.label :Nome_conta %>
+        <%= f.text_field :nome_conta, :class => "form-control" %>
+      </div>
+   </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+        <div class="form-group">
+        <label>Agência</label>
+        <%= f.text_field :numr_agencia, :class => "form-control" %>
+      </div>
+   </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+        <div class="form-group">
+        <label>Conta</label>
+        <%= f.text_field :numr_conta, :class => "form-control" %>
+      </div>
+   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :nome_conta %>
-    <%= f.text_field :nome_conta %>
-  </div>
+<%= f.hidden_field :empresa_id, :value => current_user.empresa_id%>
+<%= f.hidden_field :user_inclusao, :value => current_user.id%>
 
-  <div class="field">
-    <%= f.label :numr_agencia %>
-    <%= f.text_field :numr_agencia %>
-  </div>
 
-  <div class="field">
-    <%= f.label :numr_conta %>
-    <%= f.text_field :numr_conta %>
-  </div>
+</div><!-- /.box-body -->
+</div><!-- /.box -->
 
-  <div class="field">
-    <%= f.label :empresa_id %>
-    <%= f.text_field :empresa_id %>
-  </div>
+<%= f.hidden_field :empresa_id, :value=> current_user.empresa_id%>
 
-  <div class="field">
-    <%= f.label :data_exclusao %>
-    <%= f.datetime_select :data_exclusao %>
+<div class="row mar-bot40">
+<div class="col-lg-8" >
+   <div class="btn-group">
+     <button type="submit" value="Submit" class="btn btn-primary btn-sm">
+      <span class="glyphicon glyphicon-floppy-disk"></span> Salvar
+     </button>
+     <%= link_to contabanks_path, :class => "btn btn-default btn-sm" do %>
+        <span class="glyphicon glyphicon-arrow-left"></span> Voltar
+      <% end %>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+</div>
 <% end %>

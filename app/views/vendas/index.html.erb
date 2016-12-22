@@ -1,0 +1,151 @@
+<section class="content-header">
+</section>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <input type="hidden" name="venda_id" value="0">
+    <div class="row">
+     <div class="col-md-9">
+       <div class="row">
+         <div class="col-md-7">
+            Produto/Serviço<br>
+            <input type="text" class="form-control" id="nome_produto" name="nome_produto" placeholder="Pesquise pelo produto ou serviço" onfocus="javascript:$(this).autocomplete('search','')">
+            <input type="hidden" name="produto_id">
+         </div>
+         <div class="col-md-2">
+           Qtd<br>
+            <input type="text" class="form-control" id="qtd_produto">
+         </div>
+         <div class="col-md-2">
+            Valor Uni.<br>
+            <input type="text" class="form-control" id="valor_unitario">
+         </div>
+         <div class="col-md-1">
+           Incluir<br>
+           <button type="button" class="btn btn-default" id="btnIncluirItem" onclick="incluiItem()" disabled>
+             <span class="glyphicon glyphicon glyphicon-plus"></span>
+           </button>
+         </div>
+        </div>
+        <br>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-condensed table-striped table-bordered table-hover">
+                <thead>
+            <thead>
+              <tr>
+                <td>Produto/Serviço</td>
+                <td>Qtd</td>
+                <td align="right">Valor Uni.</td>
+              </tr>
+            </thead>
+
+            <tbody id="tbProdutosItem">
+
+             </tbody>
+           </table>
+           </div>
+         </div>
+       </div>
+       <div align="right">
+         <div class="row">
+           <div class="col-md-8">
+           </div>
+           <div class="col-md-1">
+            <label style="font-size:30px">Total</label>
+           </div>
+           <div class="col-md-3">
+             <input type="text"  style="font-size:25px;color:#fe1a0d" class="form-control input-lg" id="valr_total" >
+           </div>
+         </div>
+       </div>
+     </div>
+
+    <div class="col-md-3">
+        <div class="panel panel-default">
+          <div class="panel-heading"></div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-12">
+                <label>Código<br>
+                <input type="text" class="form-control" id="nome_produto" disabled>
+              </div>
+              <div class="col-md-12">
+                <label>Quantidade</label>
+                <input type="text" class="form-control" id="nome_produto">
+              </div>
+              <div class="col-md-12">
+                <label>Preço Unitário</label>
+                <input type="text" class="form-control" id="nome_produto">
+              </div>
+              <div class="col-md-12">
+                <label>Preço Total</label>
+                <input type="text" class="form-control" id="nome_produto">
+              </div>
+              <div class="col-md-12">
+               <hr>
+              <button type="button" class="btn btn-danger" style="width:49%">
+                <span class="glyphicon glyphicon-trash"></span> Excluir
+              </button>
+              <button type="button" class="btn btn-success" style="width:49%">
+                 <span class="glyphicon glyphicon-refresh"></span> Atualizar
+               </button>
+             </div>
+            </div>
+          </div>
+         </div>
+        </div>
+      </div>
+
+       <div class="panel panel-default">
+         <div class="panel-body">
+           <div class="row">
+             <div class="col-md-2">
+               <label>Cod. Venda/Orça</label>
+               <input type="text" class="form-control input-sm" id="codigo_venda" disabled>
+             </div>
+             <div class="col-md-1" style="padding-right:7em">
+               <div class="radio">
+                 <label><input type="radio" name="optradio"> Venda</label>
+               </div>
+              <div class="radio">
+                <label><input type="radio" name="optradio"> Orçamento</label>
+              </div>
+             </div>
+             <div class="col-md-3">
+               <label>Cliente</label>
+               <input type="text" class="form-control input-sm" id="nome_cliente" disabled>
+               <input type="hidden" name="produto_id" >
+             </div>
+             <div class="col-md-2">
+               <label>Situação</label>
+               <input type="text" class="form-control input-sm" id="situacao" disabled>
+             </div>
+             <div class="col-md-2">
+               <label>Forma Pagamento</label>
+               <input type="text" class="form-control input-sm" id="nome_formapagamento">
+               <input type="hidden" name="produto_id">
+             </div>
+           </div>
+         </div>
+       </div>
+
+      </div>
+      <div class="well well-sm">
+           <button type="button" class="btn btn-primary" onclick="criaVenda()">
+              <span class="glyphicon glyphicon glyphicon-plus"></span> Nova Venda
+            </button>
+            <button type="button" class="btn btn-danger">
+              <span class="glyphicon glyphicon-remove-circle"></span> Cancelar
+            </button>
+            <button type="button" class="btn btn-success">
+              <span class="glyphicon glyphicon-ok"></span> Finalizar
+            </button>
+       </div>
+  </div>
+</div>
+
+
+<!-- inclusão do arquivo javascript na pagina -->
+<%= render 'vendaJs'%>

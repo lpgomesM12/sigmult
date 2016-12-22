@@ -28,7 +28,7 @@ class ContabanksController < ApplicationController
 
     respond_to do |format|
       if @contabank.save
-        format.html { redirect_to @contabank, notice: 'Contabank was successfully created.' }
+        format.html { redirect_to @contabank, notice: 'Conta cadastrada com sucesso.' }
         format.json { render :show, status: :created, location: @contabank }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class ContabanksController < ApplicationController
   def update
     respond_to do |format|
       if @contabank.update(contabank_params)
-        format.html { redirect_to @contabank, notice: 'Contabank was successfully updated.' }
+        format.html { redirect_to @contabank, notice: 'Conta alterada com sucesso.' }
         format.json { render :show, status: :ok, location: @contabank }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class ContabanksController < ApplicationController
   def destroy
     @contabank.destroy
     respond_to do |format|
-      format.html { redirect_to contabanks_url, notice: 'Contabank was successfully destroyed.' }
+      format.html { redirect_to contabanks_url, notice: 'Conta excluída com sucesso.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +69,6 @@ class ContabanksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contabank_params
-      params.require(:contabank).permit(:nome_banco, :nome_conta, :numr_agencia, :numr_conta, :empresa_id, :data_exclusao)
+      params.require(:contabank).permit(:nome_banco, :nome_conta, :numr_agencia, :numr_conta, :empresa_id, :data_exclusao, :user_inclusao, :user_exclusao)
     end
 end

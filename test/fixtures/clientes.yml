@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nome_cliente: MyString
+  cpf: MyString
+  endereco: one
+  data_exclusao: 2016-12-21 12:30:54
+
+two:
+  nome_cliente: MyString
+  cpf: MyString
+  endereco: two
+  data_exclusao: 2016-12-21 12:30:54

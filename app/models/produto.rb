@@ -10,8 +10,20 @@ class Produto < ApplicationRecord
 
   after_create :entrada_estoque
 
-  def self.search(term)
-    where("lower(nome_produto)like ?", "%#{term.downcase}%")
+  attr_accessor :valr_unitario
+
+  def valr_unitario
+    @valr_unitario
+  end
+
+  # setter
+  def valr_unitario=(val)
+    @valr_unitario = val
+  end
+
+
+  def self.search(term,empresa_id)
+    where("lower(nome_produto)like ? AND empresa_id = ?", "%#{term.downcase}%", "#{empresa_id}")
   end
 
   private

@@ -1,0 +1,1 @@
+json.array! @telefoneclientes, partial: 'telefoneclientes/telefonecliente', as: :telefonecliente

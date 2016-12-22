@@ -1,0 +1,1 @@
+json.array! @itenvendas, partial: 'itenvendas/itenvenda', as: :itenvenda

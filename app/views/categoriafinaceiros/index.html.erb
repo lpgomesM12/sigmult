@@ -1,29 +1,61 @@
-<p id="notice"><%= notice %></p>
+<section class="content">
 
-<h1>Categoriafinaceiros</h1>
+  <%if notice %>
+       <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+         <%= notice %>
+       </div>
+    <%end%>
+<div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+                <div class="col-lg-6">
+                  <%= link_to new_categoriafinaceiro_path, class: "btn btn-primary" do %>
+                         <span class="glyphicon glyphicon-plus"></span> Nova Categoria
+                  <% end %>
+                </div>
+          </div><!-- /.row -->
+      </div>
+</div>
 
-<table>
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Categorias Financeira</h3>
+     </div><!-- /.box-header -->
+  <div class="box-body table-responsive no-padding">
+    <table class="table table-condensed table-striped table-bordered table-hover">
+      <thead>
   <thead>
     <tr>
       <th>Nome categoria</th>
-      <th>Empresa</th>
-      <th colspan="3"></th>
+      <th>Categoria Pai</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @categoriafinaceiros.each do |categoriafinaceiro| %>
+      <% @categoriafinaceiros.each do |categoriafinaceiro| %>
       <tr>
         <td><%= categoriafinaceiro.nome_categoria %></td>
-        <td><%= categoriafinaceiro.empresa %></td>
-        <td><%= link_to 'Show', categoriafinaceiro %></td>
-        <td><%= link_to 'Edit', edit_categoriafinaceiro_path(categoriafinaceiro) %></td>
-        <td><%= link_to 'Destroy', categoriafinaceiro, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
+        <td><%= categoriafinaceiro.father.nome_categoria rescue nil %></td>
+
+       <td align='right'>
+        <div class="btn-group">
+            <%= link_to categoriafinaceiro, class: "btn btn-default btn-sm", title: 'Exibir', data: { toggle: 'tooltip', placement: 'top'} do %>
+              <span class="glyphicon glyphicon-list-alt text-success"></span>
+            <% end %>
+            <%= link_to  edit_categoriafinaceiro_path(categoriafinaceiro) , class: "btn btn-default btn-sm", title: 'Editar', data: { toggle: 'tooltip', placement: 'top'} do %>
+              <span class="glyphicon glyphicon-pencil text-primary"></span>
+            <% end %>
+           <%= link_to categoriafinaceiro, method: :delete, data: { confirm: 'Deseja excluir o registro?', toggle: 'tooltip', placement: 'top'}, class: "btn btn-default btn-sm", title: 'Excluír' do %>
+              <span class="glyphicon glyphicon-trash text-danger"></span>
+            <% end %>
+         </div>
+      </td>
+    </tr>
+  <% end %>
+</tbody>
 </table>
+</div>
+</div><!-- /.box -->
 
 <br>
-
-<%= link_to 'New Categoriafinaceiro', new_categoriafinaceiro_path %>

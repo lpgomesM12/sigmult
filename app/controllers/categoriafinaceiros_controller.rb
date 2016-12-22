@@ -28,7 +28,7 @@ class CategoriafinaceirosController < ApplicationController
 
     respond_to do |format|
       if @categoriafinaceiro.save
-        format.html { redirect_to @categoriafinaceiro, notice: 'Categoriafinaceiro was successfully created.' }
+        format.html { redirect_to @categoriafinaceiro, notice: 'Categoria cadastrada com sucesso.' }
         format.json { render :show, status: :created, location: @categoriafinaceiro }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class CategoriafinaceirosController < ApplicationController
   def update
     respond_to do |format|
       if @categoriafinaceiro.update(categoriafinaceiro_params)
-        format.html { redirect_to @categoriafinaceiro, notice: 'Categoriafinaceiro was successfully updated.' }
+        format.html { redirect_to @categoriafinaceiro, notice: 'Categoria alterada com sucesso.' }
         format.json { render :show, status: :ok, location: @categoriafinaceiro }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class CategoriafinaceirosController < ApplicationController
   def destroy
     @categoriafinaceiro.destroy
     respond_to do |format|
-      format.html { redirect_to categoriafinaceiros_url, notice: 'Categoriafinaceiro was successfully destroyed.' }
+      format.html { redirect_to categoriafinaceiros_url, notice: 'Categoria excluída com sucesso.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +69,6 @@ class CategoriafinaceirosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def categoriafinaceiro_params
-      params.require(:categoriafinaceiro).permit(:nome_categoria, :empresa_id)
+      params.require(:categoriafinaceiro).permit(:nome_categoria, :empresa_id, :father_id)
     end
 end

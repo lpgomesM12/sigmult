@@ -1,0 +1,1 @@
+json.array! @codvendas, partial: 'codvendas/codvenda', as: :codvenda

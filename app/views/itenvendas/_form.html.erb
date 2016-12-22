@@ -1,0 +1,42 @@
+<%= form_for(itenvenda) do |f| %>
+  <% if itenvenda.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(itenvenda.errors.count, "error") %> prohibited this itenvenda from being saved:</h2>
+
+      <ul>
+      <% itenvenda.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :valor_unitario %>
+    <%= f.text_field :valor_unitario %>
+  </div>
+
+  <div class="field">
+    <%= f.label :qtd_item %>
+    <%= f.number_field :qtd_item %>
+  </div>
+
+  <div class="field">
+    <%= f.label :valr_total %>
+    <%= f.text_field :valr_total %>
+  </div>
+
+  <div class="field">
+    <%= f.label :venda_id %>
+    <%= f.text_field :venda_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :produto_id %>
+    <%= f.text_field :produto_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
