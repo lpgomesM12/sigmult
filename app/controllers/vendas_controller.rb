@@ -2,6 +2,23 @@ class VendasController < ApplicationController
   before_action :set_venda, only: [:show, :edit, :update, :destroy]
 
 
+ def busca_venda
+   @venda = Venda.find(params[:venda_id])
+
+   venda_json =  {:id => @venda.id,
+                  :numr_codigo => @venda.numr_codigo,
+                  :valr_total => @venda.valr_total,
+                  :cliente_id => @venda.cliente_id,
+                  :nome_cliente => @venda.cliente.nome_cliente,
+                  :situacao => @venda.situacao,
+                  :formapagamento_id => @venda.formapagamento_id,
+                  :nome_formapagamento => @venda.formapagamento.nome_formapagamento
+                 }
+
+   return render :json => venda_json
+
+ end
+
  #criando uma venda
  def criar_venda
     @venda = Venda.new

@@ -38,3 +38,15 @@
 $(document).ready(function() {
   $('.has-tooltip').tooltip();
 });
+
+
+//função para capturar paramentros URL
+$.urlParam = function(name){
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results==null){
+       return null;
+    }
+    else{
+       return results[1] || 0;
+    }
+}

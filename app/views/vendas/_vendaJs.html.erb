@@ -4,6 +4,10 @@
  de vendas
 */
 
+
+//setando valor do id quando passado pela URL
+$("#venda_id").val($.urlParam('id'));
+
  //função que busca os produtos autocomplete.
  $(document).ready(function() {
     $('#nome_produto').autocomplete({
@@ -84,10 +88,22 @@ function carrega_dados_venda(data){
    })
  };
 
+//busca venda
+function buscaVenda() {
+  $.ajax({
+    url: '/buscaVenda',
+    data : {
+        venda_id : $("#venda_id").val()
+    },
+    success: function(data){
+      carrega_dados_venda(data);
+      buscaItensVenda();
+    }
+  })
+}
 
 //monda lista de itens da venda
 function monta_lista_itemvenda(data) {
-
     var html = "";
     $("#tbItemVenda").empty();
      for (var i in data) {
@@ -98,24 +114,25 @@ function monta_lista_itemvenda(data) {
        html += "<td align='right'>"+item.valor_total+"</td></tr>";
       };
 
-
-
-
       if (data != ""){
         var result = data[0];
          $('#valr_total').val(result.valor_tatalvenda);
         }
 
    $("#tbItemVenda").append(html);
-
-
 }
-
 //Setando mascara dinheiro para campos valores
  $(function() {
   $("#valor_unitario").maskMoney({showSymbol:true, symbol:"R$", decimal:",", thousands:"."});
 })
 
-buscaItensVenda();
+ //busca intem venda
+ buscaVenda();
+
+//busca
+
+if($("#venda_id").val() != ""){
+  $("#btnIncluirItem").prop("disabled",false)
+}
 
 </script>

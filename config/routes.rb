@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   match '/criarVenda', to: 'vendas#criar_venda', via: 'get'
   match '/incluiItemVenda', to: 'itenvendas#add_item_venda', via: 'get'
   match '/buscaItensVenda', to: 'itenvendas#busca_itens_venda', via: 'get'
+  match '/buscaVenda', to: 'vendas#busca_venda', via: 'get'
 
 
 
