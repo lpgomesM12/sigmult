@@ -1,6 +1,47 @@
 class ItenvendasController < ApplicationController
   before_action :set_itenvenda, only: [:show, :edit, :update, :destroy]
 
+  include ActionView::Helpers::NumberHelper
+
+  def add_item_venda
+
+    @valor_unitario = itenvenda_params[:valor_unitario]
+    @valor_unitario = @valor_unitario.gsub('R$', '')
+    @valor_unitario = @valor_unitario.gsub('.', '')
+    @valor_unitario = @valor_unitario.gsub(',', '.').to_f
+
+    @itemvenda = Itenvenda.new(itenvenda_params)
+    @itemvenda.valor_unitario = @valor_unitario
+    @itemvenda.user_inclusao = current_user.id
+
+    @itemvenda.save
+
+    render :json => true
+
+  end
+
+  def busca_itens_venda
+
+    itensvenda = Itenvenda.where(venda_id: params[:venda_id])
+
+     @valor_total = 0
+     itensvenda.each do |item|
+       @valor_total = @valor_total + (item.qtd_item * item.valor_unitario)
+     end
+
+    itensvenda_json = itensvenda.map { |item|{:id => item.id,
+                                            :valor_unitario => number_to_currency(item.valor_unitario , unit: "", separator: ",", delimiter: ""),
+                                            :qtd_item => item.qtd_item,
+                                            :venda_id => item.venda_id,
+                                            :produto_id => item.produto_id,
+                                            :nome_produto => item.produto.nome_produto,
+                                            :valor_total => number_to_currency((item.qtd_item * item.valor_unitario) , unit: "", separator: ",", delimiter: ""),
+                                            :valor_tatalvenda => number_to_currency(@valor_total , unit: "", separator: ",", delimiter: "")}}
+
+    render :json => itensvenda_json
+  end
+
+
   # GET /itenvendas
   # GET /itenvendas.json
   def index
@@ -69,6 +110,6 @@ class ItenvendasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def itenvenda_params
-      params.require(:itenvenda).permit(:valor_unitario, :qtd_item, :valr_total, :venda_id, :produto_id)
+      params.require(:itenvenda).permit(:valor_unitario, :qtd_item, :valr_total, :venda_id, :produto_id, :user_inclusao)
     end
 end

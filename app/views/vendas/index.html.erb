@@ -3,14 +3,14 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <input type="hidden" name="venda_id" value="0">
+    <input type="hidden" id="venda_id">
     <div class="row">
      <div class="col-md-9">
        <div class="row">
          <div class="col-md-7">
             Produto/Serviço<br>
             <input type="text" class="form-control" id="nome_produto" name="nome_produto" placeholder="Pesquise pelo produto ou serviço" onfocus="javascript:$(this).autocomplete('search','')">
-            <input type="hidden" name="produto_id">
+            <input type="hidden" id="produto_id">
          </div>
          <div class="col-md-2">
            Qtd<br>
@@ -35,13 +35,14 @@
                 <thead>
             <thead>
               <tr>
-                <td>Produto/Serviço</td>
-                <td>Qtd</td>
-                <td align="right">Valor Uni.</td>
+                <th>Produto/Serviço</th>
+                <th>Qtd</th>
+                <th>Valor Uni.</th>
+                <th style="text-align:right">Valor Total</th>
               </tr>
             </thead>
 
-            <tbody id="tbProdutosItem">
+            <tbody id="tbItemVenda">
 
              </tbody>
            </table>
@@ -56,7 +57,7 @@
             <label style="font-size:30px">Total</label>
            </div>
            <div class="col-md-3">
-             <input type="text"  style="font-size:25px;color:#fe1a0d" class="form-control input-lg" id="valr_total" >
+             <input type="text"  style="font-size:25px;color:#fe1a0d;font-weight: bold" class="form-control input-lg" id="valr_total" >
            </div>
          </div>
        </div>
@@ -116,7 +117,7 @@
              <div class="col-md-3">
                <label>Cliente</label>
                <input type="text" class="form-control input-sm" id="nome_cliente" disabled>
-               <input type="hidden" name="produto_id" >
+               <input type="hidden" name="cliente_id" >
              </div>
              <div class="col-md-2">
                <label>Situação</label>
@@ -125,26 +126,28 @@
              <div class="col-md-2">
                <label>Forma Pagamento</label>
                <input type="text" class="form-control input-sm" id="nome_formapagamento">
-               <input type="hidden" name="produto_id">
+               <input type="hidden" name="formapagamento_id">
              </div>
            </div>
          </div>
        </div>
 
+       <div class="well well-sm">
+            <button type="button" class="btn btn-primary" onclick="criaVenda()">
+               <span class="glyphicon glyphicon glyphicon-plus"></span> Nova Venda
+             </button>
+             <button type="button" class="btn btn-danger">
+               <span class="glyphicon glyphicon-remove-circle"></span> Cancelar
+             </button>
+             <button type="button" class="btn btn-success">
+               <span class="glyphicon glyphicon-ok"></span> Finalizar
+             </button>
+        </div>
       </div>
-      <div class="well well-sm">
-           <button type="button" class="btn btn-primary" onclick="criaVenda()">
-              <span class="glyphicon glyphicon glyphicon-plus"></span> Nova Venda
-            </button>
-            <button type="button" class="btn btn-danger">
-              <span class="glyphicon glyphicon-remove-circle"></span> Cancelar
-            </button>
-            <button type="button" class="btn btn-success">
-              <span class="glyphicon glyphicon-ok"></span> Finalizar
-            </button>
-       </div>
   </div>
 </div>
+
+
 
 
 <!-- inclusão do arquivo javascript na pagina -->

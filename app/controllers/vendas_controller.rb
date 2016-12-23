@@ -2,10 +2,6 @@ class VendasController < ApplicationController
   before_action :set_venda, only: [:show, :edit, :update, :destroy]
 
 
-def add_item_venda
-  
-end
-
  #criando uma venda
  def criar_venda
     @venda = Venda.new

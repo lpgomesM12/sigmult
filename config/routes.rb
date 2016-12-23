@@ -31,6 +31,9 @@ Rails.application.routes.draw do
   match '/saidaEstoque', to: 'movimentacaoprodutos#saida', via: 'get'
   match '/listarCidade', to: 'cidades#get_cities', via: 'get'
   match '/criarVenda', to: 'vendas#criar_venda', via: 'get'
+  match '/incluiItemVenda', to: 'itenvendas#add_item_venda', via: 'get'
+  match '/buscaItensVenda', to: 'itenvendas#busca_itens_venda', via: 'get'
+
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
