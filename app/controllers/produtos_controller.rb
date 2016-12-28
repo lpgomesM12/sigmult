@@ -16,7 +16,7 @@ class ProdutosController < ApplicationController
   # GET /produtos.json
   def index
     if params[:q]
-       @produtos = Produto.search(params[:q])
+       @produtos = Produto.search(params[:q],current_user.empresa_id)
        @q = params[:q]
     else
       @produtos = Produto.all

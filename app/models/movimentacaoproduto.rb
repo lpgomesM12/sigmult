@@ -20,7 +20,7 @@ class Movimentacaoproduto < ApplicationRecord
             #quando já tem produto atualiza com os valores do estoque
             @estoque = Estoque.find(@produto.first.id)
             @qtd_atualizada = (@estoque.qtd_produto + self.qtd_produto)
-            Estoque.update(:qtd_produto => @qtd_atualizada, :produto_id => self.produto_id)
+            @estoque.update(:qtd_produto => @qtd_atualizada, :produto_id => self.produto_id)
         end
 
       elsif self.tipo_movimentacao == "SAIDA"
@@ -28,7 +28,7 @@ class Movimentacaoproduto < ApplicationRecord
             @produto = Estoque.where(produto_id: self.produto_id)
             @estoque = Estoque.find(@produto.first.id)
             @qtd_atualizada = (@estoque.qtd_produto - self.qtd_produto)
-            Estoque.update(:qtd_produto => @qtd_atualizada, :produto_id => self.produto_id)
+            @estoque.update(:qtd_produto => @qtd_atualizada, :produto_id => self.produto_id)
 
       end
     end

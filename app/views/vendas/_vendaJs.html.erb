@@ -52,17 +52,25 @@ function carrega_dados_venda(data){
   $("#nome_formapagamento").val(data.nome_formapagamento);
   $("#formapagamento_id").val(data.formapagamento_id);
   $("#valr_total").val(data.valr_total);
-  $("#btnIncluirItem").prop("disabled",false)
+  $("#btnIncluirItem").prop("disabled",false);
+  $("#nome_produto").prop("disabled",false)
+  $("#nome_produto").prop("disabled",false)
+  $("#qtd_produto").prop("disabled",false)
+  $("#valor_unitario").prop("disabled",false)
+  $("#btnNovaVenda").prop("disabled",true)
+  $("#btnCancelaVenda").prop("disabled",false)
+  $("#btnFinalizaVenda").prop("disabled",false)
+
  }
 
 //Inclui intem na venda
  function incluiItem(){
-       var itenvenda = { "valor_unitario": $('#valor_unitario').val(),
-                         "qtd_item": $('#qtd_produto').val(),
-                         "valr_total": $('#valr_total').val(),
-                         "venda_id": $('#venda_id').val(),
-                         "produto_id": $('#produto_id').val()
-                  }
+       var itenvenda = {
+            " valor_unitario": $('#valor_unitario').val(),
+              "qtd_item": $('#qtd_produto').val(),
+              "venda_id": $('#venda_id').val(),
+              "produto_id": $('#produto_id').val()
+                      }
       $.ajax({
         url: 'incluiItemVenda',
         data : {
@@ -74,6 +82,21 @@ function carrega_dados_venda(data){
       })
   };
 
+//Alterar venda
+function alteratem(){
+        $.ajax({
+          url: 'alterarItemVenda',
+          data : {
+              id : $('#itenvenda_id').val(),
+              valor_unitario : $('#preco_item').val(),
+              valr_total : $('#precototal_item').val(),
+              qtd_item : $('#qtd_item').val()
+          },
+          success: function(data){
+            buscaItensVenda();
+        }
+      })
+  };
 
  //busca intens venda
  function buscaItensVenda() {
@@ -108,7 +131,8 @@ function monta_lista_itemvenda(data) {
     $("#tbItemVenda").empty();
      for (var i in data) {
        var item = data[i];
-       html += "<tr><td>"+item.nome_produto+"</td>";
+       html += "<tr onclick='selectItem("+item.id+")'>";
+       html += "<td>"+item.nome_produto+"</td>";
        html += "<td>"+item.qtd_item+"</td>";
        html += "<td>"+item.valor_unitario+"</td>";
        html += "<td align='right'>"+item.valor_total+"</td></tr>";
@@ -117,22 +141,73 @@ function monta_lista_itemvenda(data) {
       if (data != ""){
         var result = data[0];
          $('#valr_total').val(result.valor_tatalvenda);
-        }
+      }
 
    $("#tbItemVenda").append(html);
+};
+
+// seleciona item na venda para ações de exclusão e update
+function selectItem(id) {
+  $.ajax({
+    url: '/buscaitenvenda',
+    data : {
+        itenvenda_id: id
+    },
+    success: function(data){
+      $("#itenvenda_id").val(data.id);
+      $("#nome_item").val(data.nome_item);
+      $("#qtd_item").val(data.qtd_item);
+      $("#preco_item").val(data.preco_item);
+      $("#precototal_item").val(data.precototal_item);
+      $("#btnDeletaItem").prop("disabled",false)
+      $("#btnAtualizaItem").prop("disabled",false)
+    }
+  })
+};
+
+
+//deleta item da venda
+function deletaItem() {
+  $.ajax({
+    url: '/itenvendas/'+ $("#itenvenda_id").val(),
+    type: 'DELETE',
+    data : {},
+     success: function(data){
+       buscaVenda();
+       limpaItemVenda();
+    }
+  })
+};
+
+//limpa dados item venda lateral
+function limpaItemVenda() {
+  $("#itenvenda_id").val("");
+  $("#nome_item").val("");
+  $("#qtd_item").val("");
+  $("#preco_item").val("");
+  $("#precototal_item").val("");
+  $("#btnDeletaItem").prop("disabled",true)
+  $("#btnAtualizaItem").prop("disabled",true)
 }
+
+
 //Setando mascara dinheiro para campos valores
  $(function() {
   $("#valor_unitario").maskMoney({showSymbol:true, symbol:"R$", decimal:",", thousands:"."});
+  $("#valr_total").maskMoney({showSymbol:true, symbol:"R$", decimal:",", thousands:"."});
+  $("#preco_item").maskMoney({showSymbol:true, symbol:"R$", decimal:",", thousands:"."});
+  $("#precototal_item").maskMoney({showSymbol:true, symbol:"R$", decimal:",", thousands:"."});
 })
 
- //busca intem venda
- buscaVenda();
 
 //busca
 
 if($("#venda_id").val() != ""){
+  //busca intem venda
+     buscaVenda();
   $("#btnIncluirItem").prop("disabled",false)
+}else {
+  $("#btnNovaVenda").focus();
 }
 
 </script>
