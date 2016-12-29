@@ -17,33 +17,95 @@ class ItenvendasController < ApplicationController
 
    @itenvenda = Itenvenda.find(params[:id])
 
+  #verificando se houve alteração na quantidade
+  if Integer(@itenvenda.qtd_item) != Integer(params[:qtd_item])
+
+    #setando valores para movimentacao de produtos
+    @movimentacaoproduto = Movimentacaoproduto.new()
+    @movimentacaoproduto.produto_id = @itenvenda.produto_id
+    @movimentacaoproduto.desc_observacao = "Alteração quantidade item venda"
+    @movimentacaoproduto.empresa_id = current_user.empresa_id
+    @movimentacaoproduto.user_inclusao = current_user.id
+
+
+     #verificando se a nova quantidade é maior
+     if Integer(params[:qtd_item]) > Integer(@itenvenda.qtd_item)
+
+          @diferenca = Integer(params[:qtd_item]) - Integer(@itenvenda.qtd_item)
+          @estoque = Estoque.find_by produto_id: @itenvenda.produto_id
+
+          if Integer(@estoque.qtd_produto) >= Integer(@diferenca)
+            @movimentacaoproduto.qtd_produto = @diferenca
+            @movimentacaoproduto.tipo_movimentacao = "SAIDA"
+
+           else
+             return render :json => {:alteracao => false, :msg=> "Estoque insuficiente apenas" +" "+ @estoque.qtd_produto.to_s}
+          end
+
+      else
+      #valores quando é uma entrada
+      @diferenca = Integer(@itenvenda.qtd_item) - Integer(params[:qtd_item])
+      @movimentacaoproduto.qtd_produto = @diferenca
+      @movimentacaoproduto.tipo_movimentacao = "ENTRADA"
+
+     end
+     #salvando uma nova movimentação de produto
+     @movimentacaoproduto.save
+
+  end
+
    @itenvenda.valor_unitario = @valor_unitario
    @itenvenda.valr_total = @valr_total
    @itenvenda.qtd_item = params[:qtd_item]
 
    @itenvenda.save
 
-   render :json => true
- end
+   @estoque = Estoque.find_by produto_id: @itenvenda.produto_id
+   itenvenda_json =   {:alteracao => true,
+                       :id => @itenvenda.id,
+                       :nome_item => @itenvenda.produto.nome_produto,
+                       :qtd_item => @itenvenda.qtd_item,
+                       :preco_item => number_to_currency(@itenvenda.valor_unitario , unit: "", separator: ",", delimiter: ""),
+                       :precototal_item => number_to_currency(@itenvenda.valr_total, unit: "", separator: ",", delimiter: ""),
+                       :qtd_estoque => @estoque.qtd_produto}
 
+  render :json => itenvenda_json
+
+ end
 
  def busca_iten_venda
    itenvenda = Itenvenda.find(params[:itenvenda_id])
+
+   @estoque = Estoque.find_by produto_id: itenvenda.produto_id
 
    itenvenda_json = { :id => itenvenda.id,
                        :nome_item => itenvenda.produto.nome_produto,
                        :qtd_item => itenvenda.qtd_item,
                        :preco_item => number_to_currency(itenvenda.valor_unitario , unit: "", separator: ",", delimiter: ""),
-                       :precototal_item => number_to_currency(itenvenda.valr_total, unit: "", separator: ",", delimiter: "")}
+                       :precototal_item => number_to_currency(itenvenda.valr_total, unit: "", separator: ",", delimiter: ""),
+                       :qtd_estoque => @estoque.qtd_produto}
 
   render :json => itenvenda_json
  end
 
   def add_item_venda
 
-    @estoque = Estoque.where(produto_id: params[:produto_id])
+     @estoque = Estoque.find_by produto_id: itenvenda_params[:produto_id]
 
-    if @estoque.qtd_produto >= params[:qtd_item]
+
+    #valida disponibilidade de estoque
+    if Integer(@estoque.qtd_produto) >= Integer(itenvenda_params[:qtd_item])
+        #da baixa no estoque
+        @movimentacaoproduto = Movimentacaoproduto.new()
+        @movimentacaoproduto.qtd_produto = itenvenda_params[:qtd_item]
+        @movimentacaoproduto.tipo_movimentacao = "SAIDA"
+        @movimentacaoproduto.produto_id = itenvenda_params[:produto_id]
+        @movimentacaoproduto.desc_observacao = "Venda produto"
+        @movimentacaoproduto.empresa_id = current_user.empresa_id
+        @movimentacaoproduto.user_inclusao = current_user.id
+        @movimentacaoproduto.save
+
+        #realiza a venda
         @valor_unitario = itenvenda_params[:valor_unitario]
         @valor_unitario = @valor_unitario.gsub('R$', '')
         @valor_unitario = @valor_unitario.gsub('.', '')
@@ -54,19 +116,15 @@ class ItenvendasController < ApplicationController
         @itemvenda.valr_total = @valor_unitario * @itemvenda.qtd_item
         @itemvenda.user_inclusao = current_user.id
         @itemvenda.save
-        render :json => true
-
+        render :json => {:inclusao => true, :msg=> "Inclusão realizada com sucesso"}
       else
-
+      render :json => {:inclusao => false, :msg=> "Estoque insuficiente apenas" +" "+ @estoque.qtd_produto.to_s}
     end
 
   end
 
   def busca_itens_venda
-
     itensvenda = Itenvenda.where(venda_id: params[:venda_id])
-
-
     @valor_total = itensvenda.sum(:valr_total)
 
     itensvenda_json = itensvenda.map { |item|{:id => item.id,
@@ -135,8 +193,20 @@ class ItenvendasController < ApplicationController
   # DELETE /itenvendas/1
   # DELETE /itenvendas/1.json
   def destroy
+
+    #estorno estoque
+    @movimentacaoproduto = Movimentacaoproduto.new()
+    @movimentacaoproduto.qtd_produto = @itenvenda.qtd_item
+    @movimentacaoproduto.tipo_movimentacao = "ENTRADA"
+    @movimentacaoproduto.produto_id = @itenvenda.produto_id
+    @movimentacaoproduto.desc_observacao = "Estorno exclusão item venda"
+    @movimentacaoproduto.empresa_id = current_user.empresa_id
+    @movimentacaoproduto.user_inclusao = current_user.id
+
     @itenvenda.destroy
+    @movimentacaoproduto.save
     render :json => true
+
     # respond_to do |format|
     #   format.html { redirect_to itenvendas_url, notice: 'Itenvenda was successfully destroyed.' }
     #   format.json { head :no_content }

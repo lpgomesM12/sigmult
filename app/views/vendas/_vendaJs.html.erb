@@ -19,7 +19,8 @@ $("#venda_id").val($.urlParam('id'));
     $('#nome_produto').val('');
   }
  },
-  //ação quando selecioar um produto da busca
+
+//ação quando selecioar um produto da busca
  select: function(event, ui) {
   if (ui.item) {
       $("#produto_id").val(ui.item.id);
@@ -66,7 +67,7 @@ function carrega_dados_venda(data){
 //Inclui intem na venda
  function incluiItem(){
        var itenvenda = {
-            " valor_unitario": $('#valor_unitario').val(),
+              "valor_unitario": $('#valor_unitario').val(),
               "qtd_item": $('#qtd_produto').val(),
               "venda_id": $('#venda_id').val(),
               "produto_id": $('#produto_id').val()
@@ -77,10 +78,26 @@ function carrega_dados_venda(data){
             itenvenda
         },
         success: function(data){
+          if (!data.inclusao){
+            modalMsg(data.msg);
+            return;
+          }
           buscaItensVenda();
         }
       })
   };
+
+ // calculando valor total do item de acordo com a quantidade
+ $("#qtd_item").blur(function () {
+   var v = $("#preco_item").val().replace(",", ".");
+   console.log(v);
+   var qtd = $("#qtd_item").val();
+   var valor = qtd*v;
+  //  console.log(valor);
+  //  console.log(qtd);
+   $("#precototal_item").val(valor.toFixed(2));
+
+});
 
 //Alterar venda
 function alteratem(){
@@ -93,7 +110,13 @@ function alteratem(){
               qtd_item : $('#qtd_item').val()
           },
           success: function(data){
+            if (!data.alteracao){
+               modalMsg(data.msg);
+              return;
+            }
             buscaItensVenda();
+            carrega_dados_item(data);
+            //limpaItemVenda();
         }
       })
   };
@@ -121,6 +144,8 @@ function buscaVenda() {
     success: function(data){
       carrega_dados_venda(data);
       buscaItensVenda();
+      limpaItemVenda();
+      limpaCabecalhoVenda();
     }
   })
 }
@@ -131,7 +156,7 @@ function monta_lista_itemvenda(data) {
     $("#tbItemVenda").empty();
      for (var i in data) {
        var item = data[i];
-       html += "<tr onclick='selectItem("+item.id+")'>";
+       html += "<tr  style='cursor:pointer;' onclick='selectItem("+item.id+")'>";
        html += "<td>"+item.nome_produto+"</td>";
        html += "<td>"+item.qtd_item+"</td>";
        html += "<td>"+item.valor_unitario+"</td>";
@@ -146,6 +171,11 @@ function monta_lista_itemvenda(data) {
    $("#tbItemVenda").append(html);
 };
 
+function modalMsg(msg) {
+  $('#txtmsg').text(msg);
+  $('#myModalMsg').modal('show');
+}
+
 // seleciona item na venda para ações de exclusão e update
 function selectItem(id) {
   $.ajax({
@@ -154,17 +184,22 @@ function selectItem(id) {
         itenvenda_id: id
     },
     success: function(data){
-      $("#itenvenda_id").val(data.id);
-      $("#nome_item").val(data.nome_item);
-      $("#qtd_item").val(data.qtd_item);
-      $("#preco_item").val(data.preco_item);
-      $("#precototal_item").val(data.precototal_item);
-      $("#btnDeletaItem").prop("disabled",false)
-      $("#btnAtualizaItem").prop("disabled",false)
+     carrega_dados_item(data);
     }
   })
 };
 
+// dados item lateral
+function carrega_dados_item(data) {
+  $("#itenvenda_id").val(data.id);
+  $("#nome_item").val(data.nome_item);
+  $("#qtd_item").val(data.qtd_item);
+  $("#preco_item").val(data.preco_item);
+  $("#precototal_item").val(data.precototal_item);
+  $("#qtdtxtestoque").text("Qtd estoque" +" "+ data.qtd_estoque);
+  $("#btnDeletaItem").prop("disabled",false)
+  $("#btnAtualizaItem").prop("disabled",false)
+}
 
 //deleta item da venda
 function deletaItem() {
@@ -185,9 +220,17 @@ function limpaItemVenda() {
   $("#nome_item").val("");
   $("#qtd_item").val("");
   $("#preco_item").val("");
+  $("#qtdtxtestoque").text("");
   $("#precototal_item").val("");
   $("#btnDeletaItem").prop("disabled",true)
   $("#btnAtualizaItem").prop("disabled",true)
+};
+
+function limpaCabecalhoVenda() {
+  $("#nome_produto").val("");
+  $("#produto_id").val("");
+  $("#qtd_produto").val("");
+  $("#valor_unitario").val("");
 }
 
 
@@ -201,7 +244,6 @@ function limpaItemVenda() {
 
 
 //busca
-
 if($("#venda_id").val() != ""){
   //busca intem venda
      buscaVenda();
