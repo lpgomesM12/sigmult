@@ -135,14 +135,17 @@
             <button type="button" class="btn btn-primary" onclick="criaVenda()" id="btnNovaVenda">
                <span class="glyphicon glyphicon glyphicon-plus"></span> Nova Venda
              </button>
-             <button type="button" class="btn btn-info" onclick="criaOrçamento()" id="btnNovaOcamento" disabled>
+             <button type="button" class="btn btn-info" onclick="criaOrçamento()" id="btnNovaOcamento" data-toggle="tooltip" title="Indisponível no momento" disabled>
                 <span class="glyphicon glyphicon glyphicon-plus"></span> Orçamento
               </button>
-             <button type="button" class="btn btn-danger" onclick="modalCancelarVenda()" disabled id="btnCancelaVenda">
+             <button type="button" class="btn btn-danger" onclick="modalCancelarVenda()" id="btnCancelaVenda">
                <span class="glyphicon glyphicon-remove-circle"></span> Cancelar
              </button>
-             <button type="button" class="btn btn-success" disabled id="btnFinalizaVenda">
+             <button type="button" class="btn btn-success" id="btnFinalizaVenda" onclick="modalFinalizar()">
                <span class="glyphicon glyphicon-ok"></span> Finalizar
+             </button>
+             <button type="button" class="btn btn-success" id="btnImprimirVenda" id="btnImprimirVenda" onclick="modalFinalizar()">
+               <span class="glyphicon glyphicon-print"></span> Imprimir
              </button>
         </div>
       </div>
@@ -191,6 +194,42 @@
     </div>
 
   </div>
+</div>
+
+<!-- Modal -->
+<div id="myModalFinalizar" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Confirmação</h4>
+      </div>
+      <div class="modal-body">
+        <p>Deseja realmente finalizar a venda?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="finalizaVenda()">Sim</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<button type="button" class="btn btn-primary btn-md form-control" onclick="PrintElem();"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir </button> 
+
+<div id="myDivToPrint" name="myDivToPrint">
+
+  <table width="100%" name="tlbItensComanda" id="tlbItensComanda">
+    <tbody id="bodyTlbComanda">
+      <tr class="dotted">
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 <!-- inclusão do arquivo javascript na pagina -->

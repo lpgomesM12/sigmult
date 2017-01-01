@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :caixas
   resources :codvendas
   resources :codclientes
   resources :itenvendas
@@ -24,7 +25,7 @@ Rails.application.routes.draw do
   get 'static_pages/home'
   get 'buscafornecedor' => 'fornecedors#busca'
   get 'buscaproduto' => 'produtos#busca'
-
+  get 'pdv' => 'vendas#pdv'
   root 'static_pages#home'
 
   match '/buscaitenvenda', to: 'itenvendas#busca_iten_venda', via: 'get'
@@ -36,6 +37,9 @@ Rails.application.routes.draw do
   match '/alterarItemVenda', to: 'itenvendas#atualizar_item_venda', via: 'get'
   match '/buscaItensVenda', to: 'itenvendas#busca_itens_venda', via: 'get'
   match '/buscaVenda', to: 'vendas#busca_venda', via: 'get'
+  match '/cancelaVenda', to: 'vendas#cancela_venda', via: 'get'
+  match '/caixaAberto', to: 'caixas#caixa_aberto', via: 'get'
+  match '/finalizaVenda', to: 'vendas#finalizar_venda', via: 'get'
 
 
 

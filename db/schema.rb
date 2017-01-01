@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161222104326) do
+ActiveRecord::Schema.define(version: 20161231184319) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "caixas", force: :cascade do |t|
+    t.datetime "data_abertura"
+    t.datetime "data_fechamento"
+    t.decimal  "valr_caixa",      precision: 10, scale: 2
+    t.integer  "empresa_id"
+    t.integer  "user_abertura"
+    t.integer  "user_fechamento"
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.index ["empresa_id"], name: "index_caixas_on_empresa_id", using: :btree
+    t.index ["user_abertura"], name: "index_caixas_on_user_abertura", using: :btree
+    t.index ["user_fechamento"], name: "index_caixas_on_user_fechamento", using: :btree
+  end
 
   create_table "categoriaempresas", force: :cascade do |t|
     t.string   "nome_categoria"
@@ -293,6 +307,8 @@ ActiveRecord::Schema.define(version: 20161222104326) do
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
     t.integer  "numr_codigo"
+    t.integer  "caixa_id"
+    t.index ["caixa_id"], name: "index_vendas_on_caixa_id", using: :btree
     t.index ["cliente_id"], name: "index_vendas_on_cliente_id", using: :btree
     t.index ["empresa_id"], name: "index_vendas_on_empresa_id", using: :btree
     t.index ["formapagamento_id"], name: "index_vendas_on_formapagamento_id", using: :btree
@@ -300,6 +316,7 @@ ActiveRecord::Schema.define(version: 20161222104326) do
     t.index ["user_inclusao"], name: "index_vendas_on_user_inclusao", using: :btree
   end
 
+  add_foreign_key "caixas", "empresas"
   add_foreign_key "categoriafinaceiros", "empresas"
   add_foreign_key "categoriaprodutos", "empresas"
   add_foreign_key "cidades", "estados"
@@ -327,6 +344,7 @@ ActiveRecord::Schema.define(version: 20161222104326) do
   add_foreign_key "telefonefornecedors", "fornecedors"
   add_foreign_key "unidademedidas", "empresas"
   add_foreign_key "users", "empresas"
+  add_foreign_key "vendas", "caixas"
   add_foreign_key "vendas", "clientes"
   add_foreign_key "vendas", "empresas"
   add_foreign_key "vendas", "formapagamentos"

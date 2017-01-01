@@ -1,0 +1,54 @@
+<section class="content">
+
+  <%if notice %>
+       <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+         <%= notice %>
+       </div>
+    <%end%>
+<!-- <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+                <div class="col-lg-6">
+                  <%#= link_to new_caixa_path, class: "btn btn-primary" do %>
+                         <span class="glyphicon glyphicon-plus"></span> Abrir Caixa
+                  <%# end %>
+                </div>
+          </div
+      </div>
+</div> -->
+
+  <div class="box box-primary">
+    <div class="box-header with-border">
+      <h3 class="box-title">Caixas</h3>
+     </div><!-- /.box-header -->
+  <div class="box-body table-responsive no-padding">
+    <table class="table table-striped table-bordered table-hover table-condensed">
+      <thead>
+  <thead>
+    <tr>
+      <th>Data Abertura</th>
+      <th>Data Fechamento</th>
+      <th>Valor Caixa</th>
+    </tr>
+  </thead>
+
+  <tbody>
+        <% @caixas.each do |caixa| %>
+      <tr>
+        <td><%= caixa.data_abertura %></td>
+        <td><%= caixa.data_fechamento %></td>
+        <td><%= caixa.valr_caixa %></td>
+       <td align='right'>
+         <button type="button"  name="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="left">
+           <span class="glyphicon glyphicon glyphicon-minus"></span> Fechar
+         </button>
+      </td>
+    </tr>
+  <% end %>
+</tbody>
+</table>
+</div>
+</div><!-- /.box -->
+
+</section>

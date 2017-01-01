@@ -42,3 +42,7 @@ CODCLIENTE
 rails g scaffold codcliente numr_codigo:integer empresa:references
 CODVENDA
 rails g scaffold codvenda numr_contador:integer empresa:references
+CAIXA
+rails g scaffold caixa data_abertura:datetime data_fechamento:datetime valr_caixa:decimal
+REFERENCIA CAIXA A VENDA
+rails g migration addcolumToVenda caixa:reference

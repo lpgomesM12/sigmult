@@ -2,6 +2,7 @@ class Venda < ApplicationRecord
   belongs_to :cliente
   belongs_to :empresa
   belongs_to :formapagamento
+  belongs_to :caixa, optional: true
 
 
  before_create  :geraCodigo

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  data_abertura: 2016-12-31 13:40:20
+  data_fechamento: 2016-12-31 13:40:20
+  valr_caixa: 9.99
+
+two:
+  data_abertura: 2016-12-31 13:40:20
+  data_fechamento: 2016-12-31 13:40:20
+  valr_caixa: 9.99

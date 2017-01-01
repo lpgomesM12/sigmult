@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Data abertura:</strong>
+  <%= @caixa.data_abertura %>
+</p>
+
+<p>
+  <strong>Data fechamento:</strong>
+  <%= @caixa.data_fechamento %>
+</p>
+
+<p>
+  <strong>Valr caixa:</strong>
+  <%= @caixa.valr_caixa %>
+</p>
+
+<%= link_to 'Edit', edit_caixa_path(@caixa) %> |
+<%= link_to 'Back', caixas_path %>

@@ -2,7 +2,7 @@ class FornecedorsController < ApplicationController
   before_action :set_fornecedor, only: [:show, :edit, :update, :destroy]
 
   def busca
-   @fornecedors = Fornecedor.search(params[:term]).limit(10)
+    @fornecedors = Fornecedor.search(params[:term]).limit(10)
   end
 
   # GET /fornecedors
