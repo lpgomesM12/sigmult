@@ -32,7 +32,6 @@
           <div class="panel-body">
             <div class="box-body table-responsive no-padding">
               <table class="table table-condensed table-striped table-bordered table-hover">
-                <thead>
             <thead>
               <tr>
                 <th>Produto/Serviço</th>
@@ -144,7 +143,7 @@
              <button type="button" class="btn btn-success" id="btnFinalizaVenda" onclick="modalFinalizar()">
                <span class="glyphicon glyphicon-ok"></span> Finalizar
              </button>
-             <button type="button" class="btn btn-success" id="btnImprimirVenda" id="btnImprimirVenda" onclick="modalFinalizar()">
+             <button type="button" class="btn btn-success" id="btnImprimirVenda" id="btnImprimirVenda" onclick="modalCupom()">
                <span class="glyphicon glyphicon-print"></span> Imprimir
              </button>
         </div>
@@ -219,8 +218,87 @@
 </div>
 
 
+<div id="myModalCupom" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
 
-<button type="button" class="btn btn-primary btn-md form-control" onclick="PrintElem();"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir </button> 
+      <div class="modal-body dotted" style="font-size: 11px" id="cupomImprimir">
+
+        <style type="text/css">
+        table th, table td {
+        border-bottom-style:
+        dotted;
+        border-color:gray;
+        border-width: 0px;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 100%;
+        }
+        p.serif {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 100%;
+        }
+        hr {
+        borderstyle:
+        dotted;
+        border-color:gray;
+        border-width: 1px;
+        }
+        </style>
+
+        <div align="center"><strong> <%=current_user.empresa.nome_empresa.upcase%></strong></div>
+        <div align="center"><%=current_user.empresa.endereco_completo%></div>
+        <p class="serif">
+         <strong>CLIENTE:</strong><span id="nome_cliente_cupom"></span>
+        </p>
+        <div align="center"><strong> CUPOM NÂO FISCAL</strong></div>
+        <br>
+        <table width="100%">
+          <tr>
+           <td><strong>DT. VENDA</strong>: <span id="data_venda_cupom"></span>
+           </td>
+         </tr>
+         <tr>
+           <td><strong>COMPROVANTE VENDA N° </strong>: <span id="numr_codigo_cupom"></span></td>
+         </tr>
+        </table>
+        <hr>
+
+        <table width="100%">
+        <thead>
+         <tr>
+          <td align='left'><strong>Descricao</strong></td>
+          <td align='center'><strong>Qtd</strong></td>
+          <td align='center'><strong>P.Uni</strong></td>
+          <td align='right'><strong>V.Item</strong></td>
+         </tr>
+         </thead>
+         <tbody id="tbListaCupom">
+          </tbody>
+        </table>
+       <hr style="margin-bottom: 0;margin-top: 0;">
+      <table width="100%">
+         <tr>
+           <td><strong>Total  R$</strong></td>
+           <td align='right'><p id="valor_total_cupom"></p></td>
+         </tr>
+         <tr><td><br></td><tr>
+         <tr>
+           <td><strong>FORMA PGTO:</strong><span id="forma_pagamento_cupom"></span></td>
+           <td align='left'></td>
+         </tr>
+      </table>
+      <br>
+       <div align="center"><strong> ** OBRIGADO VOLTE SEMPRE **</strong></div>
+      </div>
+        <br>
+       <button type="button" class="btn btn-primary btn-block" onclick="printCupom();"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir </button>
+    </div>
+  </div>
+</div>
 
 <div id="myDivToPrint" name="myDivToPrint">
 

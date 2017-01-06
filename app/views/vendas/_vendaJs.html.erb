@@ -142,7 +142,8 @@ function alteratem(){
          venda_id : $("#venda_id").val()
      },
      success: function(data){
-       monta_lista_itemvenda(data)
+       monta_lista_itemvenda(data);
+       monta_lista_cupom(data);
      }
    })
  };
@@ -156,12 +157,21 @@ function buscaVenda() {
     },
     success: function(data){
       carrega_dados_venda(data);
+      carrega_dados_cupom(data);
       buscaItensVenda();
       limpaItemVenda();
       limpaCabecalhoVenda();
     }
   })
-}
+};
+
+//carrega dados cupom
+function carrega_dados_cupom(data) {
+   $("#data_venda_cupom").text(data.data_venda);
+   $("#numr_codigo_cupom").text(data.numr_codigo);
+   $("#forma_pagamento_cupom").text(data.nome_formapagamento);
+   $("#nome_cliente_cupom").text(data.nome_cliente);
+};
 
 //monda lista de itens da venda
 function monta_lista_itemvenda(data) {
@@ -182,6 +192,27 @@ function monta_lista_itemvenda(data) {
       }
 
    $("#tbItemVenda").append(html);
+};
+
+//monda lista modal cupom
+function monta_lista_cupom(data) {
+    var html = "";
+    $("#tbListaCupom").empty();
+     for (var i in data) {
+       var item = data[i];
+       html += "<tr>";
+       html += "<td>"+item.nome_produto+"</td>";
+       html += "<td align='center'>"+item.qtd_item+"</td>";
+       html += "<td align='center'>"+item.valor_unitario+"</td>";
+       html += "<td align='right'>"+item.valor_total+"</td></tr>";
+      };
+
+      if (data != ""){
+        var result = data[0];
+           $("#valor_total_cupom").text(result.valor_tatalvenda);
+      }
+
+   $("#tbListaCupom").append(html);
 };
 
 function modalMsg(msg) {
@@ -327,64 +358,13 @@ if($("#venda_id").val() != ""){
 }
 
 
-function PrintElem() {
-    var divToPrint = document.getElementById('myDivToPrint');
-    var htmlToPrint = '' +
-        '<hr>' +
-        '<hr>' +
-        '<style type="text/css">' +
-        'hr, table th, table td {' +
-        'border-bottom-style: ' +
-        'dotted;'  +
-        'border-color:gray;'  +
-        'border-width: 1px;' +
-        'font-family: "Courier New", Courier, monospace;' +
-        'font-size: 70%;' +
-        '}' +
-        'p.serif {' +
-        'font-family: "Courier New", Courier, monospace;' +
-        'font-size: 70%;' +
-        '}' +
-        'hr {' +
-        'borderstyle: ' +
-        'dotted;'  +
-        'border-color:gray;'  +
-        'border-width: 1px;' +
-        '}' +
-        '</style>';
-        var data = new Date();
-        var minutes = data.getMinutes();
-        var pedido = 50
-        if (minutes < 10){
-          minutes = '0' + minutes;
-        }
-        var horario = '<p class="serif">' + data.getDate() + '/' +  (data.getMonth() + 1) + '/' + data.getFullYear() + ' ' + data.getHours() + ':' + minutes + '</p>';
-        var cliente = '' +
-        '<p class="serif">' + 'Cliente: ' + $("#nome_cliente").val() + '</p>' +
-        '<p class="serif">' + 'Telefone: ' + $("#txtTelefoneCliente").val() + '</p>' +
-        '<p class="serif">' + 'Endereço: ' + $("#txtRua").val() + ' Qd. ' + $("#txtQuadra").val() + ' Lt. ' + $("#txtLote").val() + 'Set. ' +  $("#txtBairro").val() + '</p>' +
-        '<hr>' +
-        '<hr>';
-        if ($("#txtNomeCliente").val() != ""){
-          htmlToPrint += cliente;
-        }
-        horario += "<p class='serif'><b>Pedido N° " + pedido +"</b></p>";
-        htmlToPrint +=  horario;
-
-    htmlToPrint +=  divToPrint.outerHTML;
-    newWin = window.open("");
-
-    //$("#txtTelefoneCliente").val("");
-    //$("#txtRua").val("");
-    //$("#txtQuadra").val("");
-    //$("#txtLote").val("");
-    //$("#txtBairro").val("");
-    //$("#txtReferencia").val("");
-    newWin.document.write(htmlToPrint);
-    newWin.print();
-    newWin.close();
+function modalCupom() {
+  $('#myModalCupom').modal('show');
 }
 
+function printCupom() {
+  $("#cupomImprimir").printElement();
+}
 
 
 </script>

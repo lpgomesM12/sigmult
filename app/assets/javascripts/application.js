@@ -33,6 +33,7 @@
 //= require plugins/select2/select2.full.min
 //= require cocoon
 //= require jquery-ui
+//= require printElement
 
 
 $(document).ready(function() {

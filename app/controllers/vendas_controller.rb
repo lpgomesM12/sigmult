@@ -72,7 +72,8 @@ end
                   :nome_cliente => @venda.cliente.nome_cliente,
                   :situacao => @venda.situacao,
                   :formapagamento_id => @venda.formapagamento_id,
-                  :nome_formapagamento => @venda.formapagamento.nome_formapagamento
+                  :nome_formapagamento => @venda.formapagamento.nome_formapagamento,
+                  :data_venda => @venda.created_at.strftime("%d/%m/%Y %H:%M:%S")
                  }
 
    return render :json => venda_json
