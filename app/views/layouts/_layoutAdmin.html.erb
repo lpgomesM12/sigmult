@@ -37,7 +37,10 @@
     <!-- Site wrapper -->
     <div class="wrapper">
 
+   <%if user_signed_in?%>
         <%= render 'layouts/header' %>
+    <%end%>
+
         <div class="content-wrapper">
           <div class="container">
             <%= yield %>
