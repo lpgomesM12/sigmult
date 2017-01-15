@@ -1,197 +1,48 @@
-<section class="content-header">
-</section>
-
 <div class="panel panel-default">
   <div class="panel-body">
-    <input type="hidden" id="venda_id">
-    <div class="row">
-     <div class="col-md-9">
-       <div class="row">
-         <div class="col-md-7">
-            Produto/Serviço<br>
-            <input type="text" class="form-control" id="nome_produto" name="nome_produto" placeholder="Pesquise pelo produto ou serviço" onfocus="javascript:$(this).autocomplete('search','')" disabled>
-            <input type="hidden" id="produto_id">
-         </div>
-         <div class="col-md-2">
-           Qtd<br>
-            <input type="text" class="form-control" id="qtd_produto" disabled>
-         </div>
-         <div class="col-md-2">
-            Valor Uni.<br>
-            <input type="text" class="form-control" id="valor_unitario" disabled>
-         </div>
-         <div class="col-md-1">
-           Incluir<br>
-           <button type="button" class="btn btn-default" id="btnIncluirItem" onclick="incluiItem()" disabled>
-             <span class="glyphicon glyphicon glyphicon-plus"></span>
-           </button>
-         </div>
-        </div>
-        <br>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <div class="box-body table-responsive no-padding">
-              <table class="table table-condensed table-striped table-bordered table-hover">
-                <thead>
-            <thead>
-              <tr>
-                <th>Produto/Serviço</th>
-                <th>Qtd</th>
-                <th>Valor Uni.</th>
-                <th style="text-align:right">Valor Total</th>
-              </tr>
-            </thead>
-
-            <tbody id="tbItemVenda">
-
-             </tbody>
-           </table>
-           </div>
-         </div>
-       </div>
-       <div align="right">
-         <div class="row">
-           <div class="col-md-8">
-           </div>
-           <div class="col-md-1">
-            <label style="font-size:30px">Total</label>
-           </div>
-           <div class="col-md-3">
-             <input type="text"  style="font-size:25px;color:#fe1a0d;font-weight: bold" class="form-control input-lg" id="valr_total" >
-           </div>
-         </div>
-       </div>
-     </div>
-
-    <div class="col-md-3">
-        <div class="panel panel-default">
-          <div class="panel-heading"></div>
-          <div class="panel-body">
-            <div class="row">
-              <!-- <div class="col-md-12">
-                <label>Código<br>
-                <input type="text" class="form-control" id="codigo_item" disabled>
-              </div> -->
-              <div class="col-md-12">
-                <label>Produto</label>   <i style="color:red"><small id="qtdtxtestoque"></small></i>
-                <input type="text" class="form-control" id="nome_item" disabled>
-              </div>
-
-              <input type="hidden" id="itenvenda_id">
-
-              <div class="col-md-12">
-                <label>Quantidade</label>
-                <input type="text" class="form-control" id="qtd_item">
-              </div>
-              <div class="col-md-12">
-                <label>Preço Unitário</label>
-                <input type="text" class="form-control" id="preco_item">
-              </div>
-              <div class="col-md-12">
-                <label>Preço Total</label>
-                <input type="text" class="form-control" id="precototal_item">
-              </div>
-              <div class="col-md-12">
-               <hr>
-              <button type="button" class="btn btn-danger" style="width:49%" onclick="deletaItem()" id="btnDeletaItem" disabled>
-                <span class="glyphicon glyphicon-trash"></span> Excluir
-              </button>
-              <button type="button" class="btn btn-success" style="width:49%" id="btnAtualizaItem" onclick="alteratem()" disabled>
-                 <span class="glyphicon glyphicon-refresh"></span> Atualizar
-               </button>
-             </div>
-            </div>
-          </div>
-         </div>
-        </div>
-      </div>
-
-       <div class="panel panel-default">
-         <div class="panel-body">
-           <div class="row">
-             <div class="col-md-2">
-               <label>Cod. Venda/Orça</label>
-               <input type="text" class="form-control input-sm" id="codigo_venda" disabled>
-             </div>
-             <div class="col-md-3">
-               <label>Cliente</label>
-               <input type="text" class="form-control input-sm" id="nome_cliente" disabled>
-               <input type="hidden" name="cliente_id" >
-             </div>
-             <div class="col-md-2">
-               <label>Situação</label>
-               <input type="text" class="form-control input-sm" id="situacao" disabled>
-             </div>
-             <div class="col-md-2">
-               <label>Forma Pagamento</label>
-               <input type="text" class="form-control input-sm" id="nome_formapagamento" disabled>
-               <input type="hidden" name="formapagamento_id">
-             </div>
-           </div>
-         </div>
-       </div>
-
-       <div class="well well-sm">
-            <button type="button" class="btn btn-primary" onclick="criaVenda()" id="btnNovaVenda">
-               <span class="glyphicon glyphicon glyphicon-plus"></span> Nova Venda
-             </button>
-             <button type="button" class="btn btn-info" onclick="criaOrçamento()" id="btnNovaOcamento" disabled>
-                <span class="glyphicon glyphicon glyphicon-plus"></span> Orçamento
-              </button>
-             <button type="button" class="btn btn-danger" onclick="modalCancelarVenda()" disabled id="btnCancelaVenda">
-               <span class="glyphicon glyphicon-remove-circle"></span> Cancelar
-             </button>
-             <button type="button" class="btn btn-success" disabled id="btnFinalizaVenda">
-               <span class="glyphicon glyphicon-ok"></span> Finalizar
-             </button>
-        </div>
-      </div>
+    Basic panel example
   </div>
 </div>
 
 
-<!-- Modal -->
-<div id="myModalMsg" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-sm">
+<p id="notice"><%= notice %></p>
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Aviso</h4>
-      </div>
-      <div class="modal-body">
-        <p id="txtmsg"></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Sair</button>
-      </div>
-    </div>
+<h1>Vendas</h1>
 
-  </div>
-</div>
+<table>
+  <thead>
+    <tr>
+      <th>Cliente</th>
+      <th>Data exclusao</th>
+      <th>Empresa</th>
+      <th>Valr desconto</th>
+      <th>Valr venda</th>
+      <th>Valr total</th>
+      <th>Situacao</th>
+      <th>Formapagamento</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
 
-<!-- Modal -->
-<div id="myModalCancelar" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-sm">
+  <tbody>
+    <% @vendas.each do |venda| %>
+      <tr>
+        <td><%= venda.cliente %></td>
+        <td><%= venda.data_exclusao %></td>
+        <td><%= venda.empresa %></td>
+        <td><%= venda.valr_desconto %></td>
+        <td><%= venda.valr_venda %></td>
+        <td><%= venda.valr_total %></td>
+        <td><%= venda.situacao %></td>
+        <td><%= venda.formapagamento %></td>
+        <td><%= link_to 'Show', venda %></td>
+        <td><%= link_to 'Edit', edit_venda_path(venda) %></td>
+        <td><%= link_to 'Destroy', venda, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Confirmação</h4>
-      </div>
-      <div class="modal-body">
-        <p>Deseja realmente cancelar a venda?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" onclick="cancelaVenda()">Sim</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
-      </div>
-    </div>
+<br>
 
-  </div>
-</div>
-
-<!-- inclusão do arquivo javascript na pagina -->
-<%= render 'vendaJs'%>
+<%= link_to 'New Venda', new_venda_path %>

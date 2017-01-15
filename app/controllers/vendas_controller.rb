@@ -21,13 +21,14 @@ def finalizar_venda
     @caixa = Caixa.find(@caix.first.id)
     @caixa.valr_caixa = @caixa.valr_caixa + @valor_venda
     @caixa.save
+    @caix_id = @caixa.id
   end
 
   #finalizar venda
   @venda = Venda.find(params[:venda_id])
   @venda.situacao = "Finalizada"
   @venda.user_exclusao = current_user.id
-  @venda.caixa_id = @caixa.id
+  @venda.caixa_id = @caix_id
   @venda.save
 
   render :json => true

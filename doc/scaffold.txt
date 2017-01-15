@@ -46,3 +46,5 @@ CAIXA
 rails g scaffold caixa data_abertura:datetime data_fechamento:datetime valr_caixa:decimal
 REFERENCIA CAIXA A VENDA
 rails g migration addcolumToVenda caixa:reference
+LANCAMENTO
+rails g scaffold lancamento nome_lancamento:string valr_lancamento:decimal valr_desconto:decimal data_vencimento:datetime data_pagamento:datetime flag_pago:boolean numr_recorrencia:integer numr_parcela:integer numr_referenciparcela:integer situacao:string data_exclusao:datetime tipo_lancamento:string categoriafinaceiro:references formapagamento:references fornecedor:references empresa:references valr_juros:decimal

@@ -1,0 +1,102 @@
+<%= form_for(lancamento) do |f| %>
+  <% if lancamento.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(lancamento.errors.count, "error") %> prohibited this lancamento from being saved:</h2>
+
+      <ul>
+      <% lancamento.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nome_lancamento %>
+    <%= f.text_field :nome_lancamento %>
+  </div>
+
+  <div class="field">
+    <%= f.label :valr_lancamento %>
+    <%= f.text_field :valr_lancamento %>
+  </div>
+
+  <div class="field">
+    <%= f.label :valr_desconto %>
+    <%= f.text_field :valr_desconto %>
+  </div>
+
+  <div class="field">
+    <%= f.label :data_vencimento %>
+    <%= f.datetime_select :data_vencimento %>
+  </div>
+
+  <div class="field">
+    <%= f.label :data_pagamento %>
+    <%= f.datetime_select :data_pagamento %>
+  </div>
+
+  <div class="field">
+    <%= f.label :flag_pago %>
+    <%= f.check_box :flag_pago %>
+  </div>
+
+  <div class="field">
+    <%= f.label :numr_recorrencia %>
+    <%= f.number_field :numr_recorrencia %>
+  </div>
+
+  <div class="field">
+    <%= f.label :numr_parcela %>
+    <%= f.number_field :numr_parcela %>
+  </div>
+
+  <div class="field">
+    <%= f.label :numr_referenciparcela %>
+    <%= f.number_field :numr_referenciparcela %>
+  </div>
+
+  <div class="field">
+    <%= f.label :situacao %>
+    <%= f.text_field :situacao %>
+  </div>
+
+  <div class="field">
+    <%= f.label :data_exclusao %>
+    <%= f.datetime_select :data_exclusao %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tipo_lancamento %>
+    <%= f.text_field :tipo_lancamento %>
+  </div>
+
+  <div class="field">
+    <%= f.label :categoriafinaceiro_id %>
+    <%= f.text_field :categoriafinaceiro_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :formapagamento_id %>
+    <%= f.text_field :formapagamento_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :fornecedor_id %>
+    <%= f.text_field :fornecedor_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :empresa_id %>
+    <%= f.text_field :empresa_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :valr_juros %>
+    <%= f.text_field :valr_juros %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

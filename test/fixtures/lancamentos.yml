@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nome_lancamento: MyString
+  valr_lancamento: 9.99
+  valr_desconto: 9.99
+  data_vencimento: 2017-01-14 09:27:06
+  data_pagamento: 2017-01-14 09:27:06
+  flag_pago: false
+  numr_recorrencia: 1
+  numr_parcela: 1
+  numr_referenciparcela: 1
+  situacao: MyString
+  data_exclusao: 2017-01-14 09:27:06
+  tipo_lancamento: MyString
+  categoriafinaceiro: one
+  formapagamento: one
+  fornecedor: one
+  empresa: one
+  valr_juros: 9.99
+
+two:
+  nome_lancamento: MyString
+  valr_lancamento: 9.99
+  valr_desconto: 9.99
+  data_vencimento: 2017-01-14 09:27:06
+  data_pagamento: 2017-01-14 09:27:06
+  flag_pago: false
+  numr_recorrencia: 1
+  numr_parcela: 1
+  numr_referenciparcela: 1
+  situacao: MyString
+  data_exclusao: 2017-01-14 09:27:06
+  tipo_lancamento: MyString
+  categoriafinaceiro: two
+  formapagamento: two
+  fornecedor: two
+  empresa: two
+  valr_juros: 9.99

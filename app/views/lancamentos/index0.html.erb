@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Lancamentos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome lancamento</th>
+      <th>Valr lancamento</th>
+      <th>Valr desconto</th>
+      <th>Data vencimento</th>
+      <th>Data pagamento</th>
+      <th>Flag pago</th>
+      <th>Numr recorrencia</th>
+      <th>Numr parcela</th>
+      <th>Numr referenciparcela</th>
+      <th>Situacao</th>
+      <th>Data exclusao</th>
+      <th>Tipo lancamento</th>
+      <th>Categoriafinaceiro</th>
+      <th>Formapagamento</th>
+      <th>Fornecedor</th>
+      <th>Empresa</th>
+      <th>Valr juros</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lancamentos.each do |lancamento| %>
+      <tr>
+        <td><%= lancamento.nome_lancamento %></td>
+        <td><%= lancamento.valr_lancamento %></td>
+        <td><%= lancamento.valr_desconto %></td>
+        <td><%= lancamento.data_vencimento %></td>
+        <td><%= lancamento.data_pagamento %></td>
+        <td><%= lancamento.flag_pago %></td>
+        <td><%= lancamento.numr_recorrencia %></td>
+        <td><%= lancamento.numr_parcela %></td>
+        <td><%= lancamento.numr_referenciparcela %></td>
+        <td><%= lancamento.situacao %></td>
+        <td><%= lancamento.data_exclusao %></td>
+        <td><%= lancamento.tipo_lancamento %></td>
+        <td><%= lancamento.categoriafinaceiro %></td>
+        <td><%= lancamento.formapagamento %></td>
+        <td><%= lancamento.fornecedor %></td>
+        <td><%= lancamento.empresa %></td>
+        <td><%= lancamento.valr_juros %></td>
+        <td><%= link_to 'Show', lancamento %></td>
+        <td><%= link_to 'Edit', edit_lancamento_path(lancamento) %></td>
+        <td><%= link_to 'Destroy', lancamento, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Lancamento', new_lancamento_path %>

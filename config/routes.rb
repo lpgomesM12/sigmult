@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :lancamentos
   resources :caixas
   resources :codvendas
   resources :codclientes
@@ -39,7 +40,9 @@ Rails.application.routes.draw do
   match '/buscaVenda', to: 'vendas#busca_venda', via: 'get'
   match '/cancelaVenda', to: 'vendas#cancela_venda', via: 'get'
   match '/caixaAberto', to: 'caixas#caixa_aberto', via: 'get'
+  match '/fecharCaixa', to: 'caixas#fechar_caixa', via: 'get'
   match '/finalizaVenda', to: 'vendas#finalizar_venda', via: 'get'
+  match '/buscalancamento', to: 'lancamentos#lancamentos', via: 'get'
 
 
 

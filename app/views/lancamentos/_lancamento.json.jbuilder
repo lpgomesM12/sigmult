@@ -1,0 +1,2 @@
+json.extract! lancamento, :id, :nome_lancamento, :valr_lancamento, :valr_desconto, :data_vencimento, :data_pagamento, :flag_pago, :numr_recorrencia, :numr_parcela, :numr_referenciparcela, :situacao, :data_exclusao, :tipo_lancamento, :categoriafinaceiro_id, :formapagamento_id, :fornecedor_id, :empresa_id, :valr_juros, :created_at, :updated_at
+json.url lancamento_url(lancamento, format: :json)

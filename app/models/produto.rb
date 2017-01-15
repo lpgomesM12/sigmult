@@ -12,15 +12,20 @@ class Produto < ApplicationRecord
 
   attr_accessor :valr_unitario
 
+  def nome_pesquisa
+      self.nome_produto + " - " + desc_tamanho
+  end
+
+
   def valr_unitario
     @valr_unitario
   end
+
 
   # setter
   def valr_unitario=(val)
     @valr_unitario = val
   end
-
 
   def self.search(term,empresa_id)
     where("lower(nome_produto)like ? AND empresa_id = ?", "%#{term.downcase}%", "#{empresa_id}")

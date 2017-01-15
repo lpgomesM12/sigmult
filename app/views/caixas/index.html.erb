@@ -36,12 +36,13 @@
   <tbody>
         <% @caixas.each do |caixa| %>
       <tr>
-        <td><%= caixa.data_abertura %></td>
-        <td><%= caixa.data_fechamento %></td>
-        <td><%= caixa.valr_caixa %></td>
+        <td><%= caixa.data_abertura.blank? ? '' : caixa.data_abertura.strftime("%d/%m/%Y")%></td>
+        <td><%= caixa.data_fechamento.blank? ? '' : caixa.data_fechamento.strftime("%d/%m/%Y") %></td>
+        <td><%= number_to_currency(caixa.valr_caixa , unit: "", separator: ",", delimiter: "") %></td>
+
        <td align='right'>
-         <button type="button"  name="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="left">
-           <span class="glyphicon glyphicon glyphicon-minus"></span> Fechar
+         <button type="button"  name="button" class="btn btn-default btn-sm" data-toggle="tooltip" onclick="modalCaixa(<%=caixa.id%>)" data-placement="left">
+           <span class="glyphicon glyphicon-ban-circle"></span> Fechar Caixa
          </button>
       </td>
     </tr>
@@ -52,3 +53,52 @@
 </div><!-- /.box -->
 
 </section>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Caixa</h4>
+      </div>
+      <div class="modal-body">
+      <input type="hidden" id="caixa_id">
+        <p>Deseja realmente fechar caixa.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" onclick="fecharCaixa()">Sim</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<script type="text/javascript">
+
+function modalCaixa(id) {
+  $('#caixa_id').val(id);
+  console.log(id);
+  $('#myModal').modal('show');
+}
+
+//fechar caixa
+function fecharCaixa() {
+  $.ajax({
+    url: '/fecharCaixa',
+    data : {
+      id: $('#caixa_id').val()
+    },
+     success: function(data){
+       location.reload();
+    }
+  })
+}
+
+
+
+</script>

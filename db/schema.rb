@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161231184319) do
+ActiveRecord::Schema.define(version: 20170114124009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,9 @@ ActiveRecord::Schema.define(version: 20161231184319) do
     t.integer  "user_fechamento"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
+    t.integer  "lancamento_id"
     t.index ["empresa_id"], name: "index_caixas_on_empresa_id", using: :btree
+    t.index ["lancamento_id"], name: "index_caixas_on_lancamento_id", using: :btree
     t.index ["user_abertura"], name: "index_caixas_on_user_abertura", using: :btree
     t.index ["user_fechamento"], name: "index_caixas_on_user_fechamento", using: :btree
   end
@@ -190,6 +192,36 @@ ActiveRecord::Schema.define(version: 20161231184319) do
     t.index ["venda_id"], name: "index_itenvendas_on_venda_id", using: :btree
   end
 
+  create_table "lancamentos", force: :cascade do |t|
+    t.string   "nome_lancamento"
+    t.decimal  "valr_lancamento",       precision: 10, scale: 2
+    t.decimal  "valr_desconto",         precision: 10, scale: 2
+    t.decimal  "valr_juros",            precision: 10, scale: 2
+    t.datetime "data_vencimento"
+    t.datetime "data_pagamento"
+    t.boolean  "flag_pago"
+    t.integer  "numr_recorrencia"
+    t.integer  "numr_parcela"
+    t.integer  "numr_referenciparcela"
+    t.string   "situacao"
+    t.datetime "data_exclusao"
+    t.string   "tipo_lancamento"
+    t.integer  "categoriafinaceiro_id"
+    t.integer  "formapagamento_id"
+    t.integer  "fornecedor_id"
+    t.integer  "empresa_id"
+    t.integer  "user_inclusao"
+    t.integer  "user_exclusao"
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.index ["categoriafinaceiro_id"], name: "index_lancamentos_on_categoriafinaceiro_id", using: :btree
+    t.index ["empresa_id"], name: "index_lancamentos_on_empresa_id", using: :btree
+    t.index ["formapagamento_id"], name: "index_lancamentos_on_formapagamento_id", using: :btree
+    t.index ["fornecedor_id"], name: "index_lancamentos_on_fornecedor_id", using: :btree
+    t.index ["user_exclusao"], name: "index_lancamentos_on_user_exclusao", using: :btree
+    t.index ["user_inclusao"], name: "index_lancamentos_on_user_inclusao", using: :btree
+  end
+
   create_table "movimentacaoprodutos", force: :cascade do |t|
     t.integer  "qtd_produto"
     t.string   "tipo_movimentacao"
@@ -317,6 +349,7 @@ ActiveRecord::Schema.define(version: 20161231184319) do
   end
 
   add_foreign_key "caixas", "empresas"
+  add_foreign_key "caixas", "lancamentos"
   add_foreign_key "categoriafinaceiros", "empresas"
   add_foreign_key "categoriaprodutos", "empresas"
   add_foreign_key "cidades", "estados"
@@ -334,6 +367,10 @@ ActiveRecord::Schema.define(version: 20161231184319) do
   add_foreign_key "fornecedors", "enderecos"
   add_foreign_key "itenvendas", "produtos"
   add_foreign_key "itenvendas", "vendas"
+  add_foreign_key "lancamentos", "categoriafinaceiros"
+  add_foreign_key "lancamentos", "empresas"
+  add_foreign_key "lancamentos", "formapagamentos"
+  add_foreign_key "lancamentos", "fornecedors"
   add_foreign_key "movimentacaoprodutos", "empresas"
   add_foreign_key "movimentacaoprodutos", "fornecedors"
   add_foreign_key "movimentacaoprodutos", "produtos"

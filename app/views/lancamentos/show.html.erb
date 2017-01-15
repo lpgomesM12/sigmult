@@ -1,0 +1,89 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nome lancamento:</strong>
+  <%= @lancamento.nome_lancamento %>
+</p>
+
+<p>
+  <strong>Valr lancamento:</strong>
+  <%= @lancamento.valr_lancamento %>
+</p>
+
+<p>
+  <strong>Valr desconto:</strong>
+  <%= @lancamento.valr_desconto %>
+</p>
+
+<p>
+  <strong>Data vencimento:</strong>
+  <%= @lancamento.data_vencimento %>
+</p>
+
+<p>
+  <strong>Data pagamento:</strong>
+  <%= @lancamento.data_pagamento %>
+</p>
+
+<p>
+  <strong>Flag pago:</strong>
+  <%= @lancamento.flag_pago %>
+</p>
+
+<p>
+  <strong>Numr recorrencia:</strong>
+  <%= @lancamento.numr_recorrencia %>
+</p>
+
+<p>
+  <strong>Numr parcela:</strong>
+  <%= @lancamento.numr_parcela %>
+</p>
+
+<p>
+  <strong>Numr referenciparcela:</strong>
+  <%= @lancamento.numr_referenciparcela %>
+</p>
+
+<p>
+  <strong>Situacao:</strong>
+  <%= @lancamento.situacao %>
+</p>
+
+<p>
+  <strong>Data exclusao:</strong>
+  <%= @lancamento.data_exclusao %>
+</p>
+
+<p>
+  <strong>Tipo lancamento:</strong>
+  <%= @lancamento.tipo_lancamento %>
+</p>
+
+<p>
+  <strong>Categoriafinaceiro:</strong>
+  <%= @lancamento.categoriafinaceiro %>
+</p>
+
+<p>
+  <strong>Formapagamento:</strong>
+  <%= @lancamento.formapagamento %>
+</p>
+
+<p>
+  <strong>Fornecedor:</strong>
+  <%= @lancamento.fornecedor %>
+</p>
+
+<p>
+  <strong>Empresa:</strong>
+  <%= @lancamento.empresa %>
+</p>
+
+<p>
+  <strong>Valr juros:</strong>
+  <%= @lancamento.valr_juros %>
+</p>
+
+<%= link_to 'Edit', edit_lancamento_path(@lancamento) %> |
+<%= link_to 'Back', lancamentos_path %>

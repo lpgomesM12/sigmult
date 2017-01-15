@@ -1,6 +1,16 @@
 class CaixasController < ApplicationController
   before_action :set_caixa, only: [:show, :edit, :update, :destroy]
 
+  include ActionView::Helpers::NumberHelper
+  
+ def fechar_caixa
+   @caixa = Caixa.find(params[:id])
+   @caixa.update(:data_fechamento => Time.zone.now, :user_fechamento => current_user.id)
+
+   render :json => true
+
+ end
+
   # GET /caixas
   # GET /caixas.json
   def index

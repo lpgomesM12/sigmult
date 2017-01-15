@@ -39,12 +39,10 @@
             <tr>
               <th>Código</th>
               <th>Nome</th>
-              <th>Categoria</th>
-              <th>Marca</th>
+              <th>Tamanho</th>
               <th>Custo R$</th>
               <th>Venda R$</th>
               <th>Status</th>
-              <th></th>
               <th></th>
             </tr>
           </thead>
@@ -54,10 +52,9 @@
               <tr>
                 <td><%= produto.id %></td>
                 <td><%= produto.nome_produto %></td>
-                <td><%= produto.categoriaproduto.nome_categoria %></td>
-                <td><%= produto.nome_marca %></td>
-                <td><%= produto.valor_custo %></td>
-                <td><%= produto.valor_venda %></td>
+                <td><%= produto.desc_tamanho %></td>
+                <td><%= number_to_currency(produto.valor_custo , unit: "", separator: ",", delimiter: "") %></td>
+                <td><%= number_to_currency(produto.valor_venda , unit: "", separator: ",", delimiter: "") %></td>
                 <td><%= produto.status %></td>
 
                 <td align='right'>
@@ -73,9 +70,6 @@
                       <% end %>
                   </div>
                 </td>
-                <td>
-                </td>
-
               </tr>
             <% end %>
           </tbody>
