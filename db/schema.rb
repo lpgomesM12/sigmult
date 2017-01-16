@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170114124009) do
+ActiveRecord::Schema.define(version: 20170116123909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -214,7 +214,9 @@ ActiveRecord::Schema.define(version: 20170114124009) do
     t.integer  "user_exclusao"
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
+    t.integer  "contabank_id"
     t.index ["categoriafinaceiro_id"], name: "index_lancamentos_on_categoriafinaceiro_id", using: :btree
+    t.index ["contabank_id"], name: "index_lancamentos_on_contabank_id", using: :btree
     t.index ["empresa_id"], name: "index_lancamentos_on_empresa_id", using: :btree
     t.index ["formapagamento_id"], name: "index_lancamentos_on_formapagamento_id", using: :btree
     t.index ["fornecedor_id"], name: "index_lancamentos_on_fornecedor_id", using: :btree
@@ -368,6 +370,7 @@ ActiveRecord::Schema.define(version: 20170114124009) do
   add_foreign_key "itenvendas", "produtos"
   add_foreign_key "itenvendas", "vendas"
   add_foreign_key "lancamentos", "categoriafinaceiros"
+  add_foreign_key "lancamentos", "contabanks"
   add_foreign_key "lancamentos", "empresas"
   add_foreign_key "lancamentos", "formapagamentos"
   add_foreign_key "lancamentos", "fornecedors"
