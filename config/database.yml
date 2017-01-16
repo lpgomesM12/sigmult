@@ -6,3 +6,15 @@ default: &default
 development:
   <<: *default
   database: sigmult
+
+
+#produção
+ # development:
+ #  adapter: postgresql
+ #  encoding: unicode
+ #  database: sigmult
+ #  host: 138.197.88.84
+ #  pool: 5
+ #  username: deploy
+ #  password: sigmultpro
+ #  port: 5432
