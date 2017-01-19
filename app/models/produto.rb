@@ -34,7 +34,7 @@ class Produto < ApplicationRecord
   private
 
   def entrada_estoque
-    Estoque.create(:qtd_produto => 0, :produto_id => self.id)
+    Estoque.create(:qtd_produto => 0, :produto_id => self.id, :empresa_id => self.empresa_id)
   end
 
 end
