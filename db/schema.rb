@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170116123909) do
+ActiveRecord::Schema.define(version: 20170119103247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,7 +126,9 @@ ActiveRecord::Schema.define(version: 20170116123909) do
     t.string   "telefone2"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.integer  "contabank_id"
     t.index ["categoriaempresa_id"], name: "index_empresas_on_categoriaempresa_id", using: :btree
+    t.index ["contabank_id"], name: "index_empresas_on_contabank_id", using: :btree
     t.index ["endereco_id"], name: "index_empresas_on_endereco_id", using: :btree
   end
 
@@ -361,6 +363,7 @@ ActiveRecord::Schema.define(version: 20170116123909) do
   add_foreign_key "codvendas", "empresas"
   add_foreign_key "contabanks", "empresas"
   add_foreign_key "empresas", "categoriaempresas"
+  add_foreign_key "empresas", "contabanks"
   add_foreign_key "empresas", "enderecos"
   add_foreign_key "enderecos", "cidades"
   add_foreign_key "estoques", "empresas"

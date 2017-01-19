@@ -69,6 +69,6 @@ class EmpresasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def empresa_params
-      params.require(:empresa).permit(:nome_empresa, :endereco_id, :categoriaempresa_id, :cnpj, :nome_responsavel, :telefone1, :telefone2)
+      params.require(:empresa).permit(:nome_empresa, :endereco_id, :categoriaempresa_id, :cnpj, :nome_responsavel, :telefone1, :telefone2, :contabank_id)
     end
 end
