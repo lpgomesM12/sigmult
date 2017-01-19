@@ -19,7 +19,7 @@ class ProdutosController < ApplicationController
        @produtos = Produto.search(params[:q],current_user.empresa_id)
        @q = params[:q]
     else
-      @produtos = Produto.all
+      @produtos = Produto.where(empresa_id: current_user.empresa_id)
     end
   end
 

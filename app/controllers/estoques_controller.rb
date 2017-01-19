@@ -4,7 +4,7 @@ class EstoquesController < ApplicationController
   # GET /estoques
   # GET /estoques.json
   def index
-    @estoques = Estoque.all
+    @estoques = Estoque.where(empresa_id: current_user.empresa_id)
   end
 
   # GET /estoques/1

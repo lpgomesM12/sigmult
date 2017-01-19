@@ -8,7 +8,7 @@ class FornecedorsController < ApplicationController
   # GET /fornecedors
   # GET /fornecedors.json
   def index
-    @fornecedors = Fornecedor.all
+    @fornecedors = Fornecedor.where(empresa_id: current_user.empresa_id)
   end
 
   # GET /fornecedors/1

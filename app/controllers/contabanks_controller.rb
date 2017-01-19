@@ -4,7 +4,7 @@ class ContabanksController < ApplicationController
   # GET /contabanks
   # GET /contabanks.json
   def index
-    @contabanks = Contabank.all
+    @contabanks = Contabank..where(empresa_id: current_user.empresa_id)
   end
 
   # GET /contabanks/1
