@@ -29,6 +29,8 @@ def finalizar_venda
   @venda.situacao = "Finalizada"
   @venda.user_exclusao = current_user.id
   @venda.caixa_id = @caix_id
+  @venda.valr_venda = @valor_venda
+  @venda.valr_total = @valor_venda
   @venda.save
 
   render :json => true

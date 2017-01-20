@@ -19,7 +19,7 @@
     </div>
 
     <div class="col-md-3 col-xs-12">
-      <div class="box box-info">
+      <div class="box box-danger">
                <div class="box-header with-border">
                  <h3 class="box-title">Caixas Aberto</h3>
                  <div class="box-tools pull-right">
@@ -43,6 +43,26 @@
                </div><!-- /.box-body -->
        </div><!-- /.box -->
    </div>
+   <div class="col-md-6 col-xs-12">
+     <div class="box box-warning">
+              <div class="box-header with-border">
+                <h3 class="box-title">Ultimas Vendas</h3>
+                <div class="box-tools pull-right">
+                  <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                </div>
+              </div>
+              <div class="box-body chart-responsive">
+             <table class="table table-bordered table-hover table-responsive table-condensed">
+                <% @vendas.each do |venda| %>
+                     <tr>
+                       <td><%= venda.created_at.blank? ? '' : venda.created_at.strftime("%d/%m/%Y")%></td>
+                        <td><%= number_to_currency(venda.valr_total , unit: "R$", separator: ",", delimiter: "") %></td>
+                     </tr>
+                <%end%>
+                </table>
+              </div><!-- /.box-body -->
+      </div><!-- /.box -->
+  </div>
 </div>
 </section>
 

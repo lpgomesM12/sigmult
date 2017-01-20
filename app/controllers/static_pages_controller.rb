@@ -11,5 +11,6 @@ class StaticPagesController < ApplicationController
     @data_fim  = Date.today.at_end_of_month.strftime('%d/%m/%Y')
     @contVendas = Venda.where("created_at >= '#{@data_inicio}' AND created_at <= '#{@data_fim}'").count
 
+    @vendas = Venda.where("created_at >= '#{@data_inicio}' AND created_at <= '#{@data_fim}'").order("created_at DESC").limit(5)
   end
 end
