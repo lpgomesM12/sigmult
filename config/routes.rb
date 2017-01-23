@@ -23,6 +23,15 @@ Rails.application.routes.draw do
   resources :cidades
   resources :estados
   resources :categoriaempresas
+
+
+  namespace :api do
+    namespace :v1 do
+       resources :lancamentos 
+    end
+  end
+
+
   get 'static_pages/home'
   get 'buscafornecedor' => 'fornecedors#busca'
   get 'buscaproduto' => 'produtos#busca'

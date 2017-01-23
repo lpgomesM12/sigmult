@@ -40,25 +40,13 @@
    <%if user_signed_in?%>
         <%= render 'layouts/header' %>
     <%end%>
-
         <div class="content-wrapper">
-          <div class="content">
+          <div class="container content-wrapper">
              <%= yield %>
            </div>
         </div>
-
-        <!-- <footer class="main-footer">
-          <div class="pull-right hidden-xs">
-            <b>Version</b>
-          </div>
-          <strong>Copyright &copy; 2016 </strong>Todos os direitos reservados.
-        </footer> -->
-
     </div>
-
     </body>
-
-
 
 <script type="text/javascript">
 

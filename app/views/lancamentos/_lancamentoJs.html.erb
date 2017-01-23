@@ -1,15 +1,46 @@
 <script type="text/javascript">
 
+
+
+
+function modalReceita() {
+    $('#myModalReceita').modal('show');
+};
+
+
+function modalDespesa() {
+    $('#myModalDespesa').modal('show');
+};
+
+
 //funcão lancamento
   function busca_lancamentos(){
      $.ajax({
-       url: '/buscalancamento',
-       data : {},
+       method: 'get',
+       url: '/api/v1/lancamentos',
+       data : {
+         empresa_id: '<%=current_user.empresa_id%>'
+       },
        success: function(data){
-         monta_lista_divia(data);
+         monta_lista_divia(data.lancamentos);
        }
      })
   };
+
+
+  //funcão lancamento
+    function deleta_lancamento(id){
+       $.ajax({
+         method: 'delete',
+         url: '/api/v1/lancamentos',
+         data : {
+           id: id
+         },
+         success: function(data){
+           monta_lista_divia(data.lancamentos);
+         }
+       })
+    };
 
  //monta lista lancamentos
   function monta_lista_divia(data){
@@ -40,7 +71,7 @@
   function chamaModal(id) {
        alert("Em breve");
    }
-   
+
     busca_lancamentos();
 
 

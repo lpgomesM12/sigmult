@@ -15,10 +15,10 @@
          <div class="box-body no-padding">
            <ul class="nav nav-pills nav-stacked">
              <!-- <li class="active"><a href="#"><i class="fa fa-inbox"></i>Receitas</a></li> -->
-             <li><a href="#"><i class="fa fa-plus"></i> Receitas</a></li>
-             <li><a href="#"><i class="fa fa-minus"></i> Despesas</a></li>
-             <li><a href="#"><i class="fa fa-exchange"></i> Transfencia</a></li>
-             <li><a href="#"><i class="fa fa-search"></i> Filtro</a></li>
+             <li onclick="modalReceita()" style='cursor:pointer;'><a><i class="fa fa-plus"></i> Receitas</a></li>
+             <li onclick="modalDespesa()" style='cursor:pointer;'><a><i class="fa fa-minus"></i> Despesas</a></li>
+             <li style='cursor:pointer;'><a><i class="fa fa-exchange"></i> Transfencia</a></li>
+             <li style='cursor:pointer;'><a><i class="fa fa-search"></i> Filtro</a></li>
            </ul>
          </div><!-- /.box-body -->
       </div><!-- /. box -->
@@ -31,7 +31,7 @@
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <div class="table-overflow">
+                <div class="table-overflow">
                   <table id="example1" class="table table-bordered table-hover table-responsive table-condensed">
                     <thead>
                       <tr>
@@ -62,4 +62,68 @@
       </div>
 </section>
 
+<!-- Modal para adionar receitas-->
+<div id="myModalReceita" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal para adionar despesas-->
+<div id="myModalDespesa" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Nova Despesa</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+         <div class="col-md-6">
+           Nome lançamento
+           <input type="text" name="nome_lancamento" id="nome_lancamento" class="form-control">
+         </div>
+         <div class="col-md-2">
+           Valor Despesa
+           <input type="text" name="valr_lancamento" id="valr_lancamento" class="form-control">
+         </div>
+         <div class="col-md-2">
+           Data Vencimento
+           <input type="text" name="data_vencimento" id="data_vencimento" class="form-control">
+         </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Sair</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <%= render 'lancamentoJs' %>
+
+<style media="screen">
+
+.table-overflow {
+    max-height:350px;
+    overflow-y:auto;
+}
+</style>

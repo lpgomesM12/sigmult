@@ -1,11 +1,9 @@
 class LancamentosController < ApplicationController
   before_action :set_lancamento, only: [:show, :edit, :update, :destroy]
 
-  include ActionView::Helpers::NumberHelper
 
  def lancamentos
    @lancamentos = Lancamento.where(empresa_id: current_user.empresa_id)
-
    json_lancamento = @lancamentos.map { |item| {:id => item.id,
                                          :data_vencimento => item.data_vencimento.blank? ? '' : item.data_vencimento.strftime("%d/%m/%Y"),
                                          :valr_lancamento => number_to_currency(item.valr_lancamento , unit: "R$", separator: ",", delimiter: ""),

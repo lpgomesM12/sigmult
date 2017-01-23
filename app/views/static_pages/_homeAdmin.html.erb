@@ -1,0 +1,113 @@
+<section class="content">
+
+<div class="row">
+
+  <div class="col-md-3 col-xs-12">
+        <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3><%=@contVendas%></h3>
+                  <p>Vendas no mês</p>
+                </div>
+          <div class="icon">
+             <i class="fa fa-shopping-cart"></i>
+            </div>
+            <%= link_to  pdv_path, :class => "small-box-footer" do %>
+              Nova Venda <i class="fa fa-arrow-circle-right"></i>
+            <% end %>
+        </a>
+     </div>
+    </div>
+
+    <div class="col-md-3 col-xs-12">
+      <div class="box box-danger">
+               <div class="box-header with-border">
+                 <h3 class="box-title">Caixas Aberto</h3>
+                 <div class="box-tools pull-right">
+                   <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                 </div>
+               </div>
+               <div class="box-body chart-responsive">
+                 <% @caixas.each do |caixa| %>
+                    <table class="table table-bordered table-hover table-responsive table-condensed">
+                      <tr>
+                        <td><%= caixa.data_abertura.blank? ? '' : caixa.data_abertura.strftime("%d/%m/%Y")%></td>
+                         <td><%= number_to_currency(caixa.valr_caixa , unit: "R$", separator: ",", delimiter: "") %></td>
+                         <td align='right'>
+                           <button type="button"  name="button" class="btn btn-default btn-sm" data-toggle="tooltip" onclick="modalCaixa(<%=caixa.id%>)" data-placement="left">
+                             <span class="glyphicon glyphicon-ban-circle"></span>
+                           </button>
+                        </td>
+                      </tr>
+                    </table>
+                 <%end%>
+               </div><!-- /.box-body -->
+       </div><!-- /.box -->
+   </div>
+   <div class="col-md-6 col-xs-12">
+     <div class="box box-warning">
+              <div class="box-header with-border">
+                <h3 class="box-title">Ultimas Vendas</h3>
+                <div class="box-tools pull-right">
+                  <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                </div>
+              </div>
+              <div class="box-body chart-responsive">
+             <table class="table table-bordered table-hover table-responsive table-condensed">
+                <% @vendas.each do |venda| %>
+                     <tr>
+                       <td><%= venda.created_at.blank? ? '' : venda.created_at.strftime("%d/%m/%Y")%></td>
+                        <td><%= number_to_currency(venda.valr_total , unit: "R$", separator: ",", delimiter: "") %></td>
+                     </tr>
+                <%end%>
+                </table>
+              </div><!-- /.box-body -->
+      </div><!-- /.box -->
+  </div>
+</div>
+</section>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-sm">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Caixa</h4>
+      </div>
+      <div class="modal-body">
+      <input type="hidden" id="caixa_id">
+        <p>Deseja realmente fechar o caixa.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" onclick="fecharCaixa()">Sim</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<script type="text/javascript">
+
+function modalCaixa(id) {
+  $('#caixa_id').val(id);
+  console.log(id);
+  $('#myModal').modal('show');
+}
+
+//fechar caixa
+function fecharCaixa() {
+  $.ajax({
+    url: '/fecharCaixa',
+    data : {
+      id: $('#caixa_id').val()
+    },
+     success: function(data){
+       location.reload();
+    }
+  })
+}
+</script>
