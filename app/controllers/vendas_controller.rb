@@ -121,7 +121,7 @@ end
   # GET /vendas
   # GET /vendas.json
   def index
-    @vendas = Venda.all
+    @vendas = Venda.where(empresa_id: current_user.empresa_id).limit(10)
   end
 
   # GET /vendas/1

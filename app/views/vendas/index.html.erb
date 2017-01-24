@@ -21,7 +21,7 @@
     <tr>
       <td><%= venda.cliente.nome_cliente %></td>
       <td><%= venda.situacao %></td>
-      <td><%= venda.valr_total %></td>
+      <td><%= number_to_currency(venda.valr_total , unit: "", separator: ",", delimiter: "") %></td>
       <td align='right'>
         <div class="btn-group">
             <%= link_to "pdv/?id=#{venda.id}" , class: "btn btn-default btn-sm", title: 'Exibir', data: { toggle: 'tooltip', placement: 'top'} do %>

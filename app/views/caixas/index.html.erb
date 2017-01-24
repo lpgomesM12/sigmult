@@ -39,12 +39,18 @@
         <td><%= caixa.data_abertura.blank? ? '' : caixa.data_abertura.strftime("%d/%m/%Y")%></td>
         <td><%= caixa.data_fechamento.blank? ? '' : caixa.data_fechamento.strftime("%d/%m/%Y") %></td>
         <td><%= number_to_currency(caixa.valr_caixa , unit: "", separator: ",", delimiter: "") %></td>
+        <%if caixa.data_fechamento.blank?%>
+            <td align='right'>
+              <button type="button"  name="button" class="btn btn-default btn-sm" data-toggle="tooltip" onclick="modalCaixa(<%=caixa.id%>)" data-placement="left">
+                <span class="glyphicon glyphicon-ban-circle"></span> Fechar Caixa
+              </button>
+            </td>
+             <%else%>
+             <td align='right'>
+                Fechado
+              </td>
+            <%end%>
 
-       <td align='right'>
-         <button type="button"  name="button" class="btn btn-default btn-sm" data-toggle="tooltip" onclick="modalCaixa(<%=caixa.id%>)" data-placement="left">
-           <span class="glyphicon glyphicon-ban-circle"></span> Fechar Caixa
-         </button>
-      </td>
     </tr>
   <% end %>
 </tbody>
