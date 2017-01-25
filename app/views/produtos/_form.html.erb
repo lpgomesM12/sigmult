@@ -16,7 +16,7 @@
   <div class="col-md-6">
     <div class="form-group">
       <label>Categoria</label>
-      <%= f.select :categoriaproduto_id, options_from_collection_for_select(Categoriaproduto.all, 'id', 'nome_categoria'), {}, {:class => 'form-control'}%>
+      <%= f.select :categoriaproduto_id, options_from_collection_for_select(Categoriaproduto.where(empresa_id: current_user.empresa_id), 'id', 'nome_categoria'), {}, {:class => 'form-control'}%>
   </div><!-- /.form-group -->
   </div>
   <div class="col-md-6">
@@ -73,7 +73,7 @@
   <div class="col-md-3">
     <div class="form-group">
         <label>Unidade Medida</label>
-        <%= f.select :unidademedida_id, options_from_collection_for_select(Unidademedida.all, 'id', 'nome_unidade'), {}, {:class => 'form-control'}%>
+        <%= f.select :unidademedida_id, options_from_collection_for_select(Unidademedida.where(empresa_id: current_user.empresa_id), 'id', 'nome_unidade'), {}, {:class => 'form-control'}%>
     </div>
   </div>
   <div class="col-md-3">

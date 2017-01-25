@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170119103247) do
+ActiveRecord::Schema.define(version: 20170125105250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -246,6 +246,26 @@ ActiveRecord::Schema.define(version: 20170119103247) do
     t.index ["user_inclusao"], name: "index_movimentacaoprodutos_on_user_inclusao", using: :btree
   end
 
+  create_table "parcelas", force: :cascade do |t|
+    t.decimal  "valr_parcela"
+    t.decimal  "valr_desconto",    precision: 10, scale: 2
+    t.decimal  "valr_pago",        precision: 10, scale: 2
+    t.datetime "data_parcela"
+    t.datetime "data_pagamento"
+    t.boolean  "flag_pago"
+    t.integer  "numr_parcela"
+    t.integer  "qtd_parcelas"
+    t.boolean  "flag_entrada"
+    t.integer  "venda_id"
+    t.integer  "empresa_id"
+    t.integer  "user_recebimento"
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.index ["empresa_id"], name: "index_parcelas_on_empresa_id", using: :btree
+    t.index ["user_recebimento"], name: "index_parcelas_on_user_recebimento", using: :btree
+    t.index ["venda_id"], name: "index_parcelas_on_venda_id", using: :btree
+  end
+
   create_table "produtos", force: :cascade do |t|
     t.string   "nome_produto"
     t.string   "desc_observacao"
@@ -380,6 +400,8 @@ ActiveRecord::Schema.define(version: 20170119103247) do
   add_foreign_key "movimentacaoprodutos", "empresas"
   add_foreign_key "movimentacaoprodutos", "fornecedors"
   add_foreign_key "movimentacaoprodutos", "produtos"
+  add_foreign_key "parcelas", "empresas"
+  add_foreign_key "parcelas", "vendas"
   add_foreign_key "produtos", "categoriaprodutos"
   add_foreign_key "produtos", "empresas"
   add_foreign_key "produtos", "unidademedidas"

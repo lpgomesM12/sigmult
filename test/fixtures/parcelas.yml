@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  valr_parcela: 9.99
+  valr_desconto: 9.99
+  valr_pago: 9.99
+  data_parcela: 2017-01-25 08:52:50
+  data_pagamento: 2017-01-25 08:52:50
+  flag_pago: false
+  numr_parcela: 1
+  qtd_parcelas: 1
+  flag_entrada: false
+  venda: one
+  empresa: one
+
+two:
+  valr_parcela: 9.99
+  valr_desconto: 9.99
+  valr_pago: 9.99
+  data_parcela: 2017-01-25 08:52:50
+  data_pagamento: 2017-01-25 08:52:50
+  flag_pago: false
+  numr_parcela: 1
+  qtd_parcelas: 1
+  flag_entrada: false
+  venda: two
+  empresa: two

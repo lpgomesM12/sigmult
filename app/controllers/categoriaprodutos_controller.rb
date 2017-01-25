@@ -4,7 +4,7 @@ class CategoriaprodutosController < ApplicationController
   # GET /categoriaprodutos
   # GET /categoriaprodutos.json
   def index
-    @categoriaprodutos = Categoriaproduto.all
+    @categoriaprodutos = Categoriaproduto.where(empresa_id: current_user.empresa_id)
   end
 
   # GET /categoriaprodutos/1

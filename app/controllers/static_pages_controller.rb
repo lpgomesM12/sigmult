@@ -9,9 +9,9 @@ class StaticPagesController < ApplicationController
       #contator
       @data_inicio = Date.today.at_beginning_of_month.strftime('%d/%m/%Y')
       @data_fim  = Date.today.at_end_of_month.strftime('%d/%m/%Y')
-      @contVendas = Venda.where("created_at >= '#{@data_inicio}' AND created_at <= '#{@data_fim}'").count
+      @contVendas = Venda.where("created_at >= '#{@data_inicio}' AND created_at <= '#{@data_fim}' AND empresa_id = #{current_user.empresa_id}").count
 
-      @vendas = Venda.where("created_at >= '#{@data_inicio}' AND created_at <= '#{@data_fim}'").order("created_at DESC").limit(5)
+      @vendas = Venda.where("created_at >= '#{@data_inicio}' AND created_at <= '#{@data_fim}' AND empresa_id = #{current_user.empresa_id}").order("created_at DESC").limit(5)
      end
   end
 end

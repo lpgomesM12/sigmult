@@ -52,3 +52,5 @@ COBERTURA
 rails g scaffold cobertura nome_cobertura:string condominio:references
 GARAGEM
 rails g scaffold garagem numr_garagem:string cobertura:references condominio:references apartamento:references
+PARCELA
+rails g model parcela valr_parcela:decimal valr_desconto:decimal valr_pago:decimal data_parcela:datetime data_pagamento:datetime flag_pago:boolean numr_parcela:integer qtd_parcelas:integer flag_entrada:boolean venda:references empresa:references
